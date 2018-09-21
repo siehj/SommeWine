@@ -1,0 +1,67 @@
+
+body {
+  height: 100%;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+}
+
+h3 {
+  margin-top: 0px;
+}
+
+.tabs {
+  text-align: center;
+}
+
+.t {
+  margin-left: 10px;
+}
+
+.tabTitle {
+  text-align: center;
+  font-size: 30px;
+}
+
+.searchMain {
+  padding-top: 10px;
+}
+.searchForm {
+  left: 20px;
+  width: 30%;
+  position: absolute;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+  height: 100%;
+}
+
+.searchResults {
+  right: 0px;
+  margin-left: 30px;
+  width: 65%;
+  position: absolute;
+}
+
+#prefList a {
+  padding: 10px;
+  /* padding-top: 15px; */
+}
+.Types {
+  display: inline-block;
+  padding-right: 15px;
+}
+.Notes {
+  display: inline-block;
+  padding-right: 15px;
+}
+.Regions {
+  display: inline-block;
+  padding-right: 15px;
+}
+
+.close {
+  margin-top: 20px;
+}

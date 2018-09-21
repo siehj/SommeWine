@@ -15,7 +15,11 @@ class App extends React.Component {
       password: '',
       query: '',
       wines: [],
-      
+      additional: {
+        types: [],
+        notes: [],
+        regions: []
+      }   
     }
   }
 
@@ -64,12 +68,24 @@ class App extends React.Component {
   }
 
   getQuery(e) {
-    this.setState({query: e.target.value});
+    // console.log(e.target.name);
+    if (e.target.name === 'query') {
+      this.setState({query: e.target.value});
+    } else {
+      // this is to add if not added to the object's array, or remove if already in the array. 
+      // mimics the checked and unchecked nature of the boxes.
+      if(!this.state.additional[e.target.name].includes(e.target.value)) {
+        this.state.additional[e.target.name].push(e.target.value);
+      } else {
+        this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
+      }
+    }
   }
 
   handleSearch() {
-    let option = {query: this.state.query}
-    $.get('/api/wines', option, (list) => {
+    //should be a get but works better as a post for the purposes of this...
+    let option = { query: this.state.query, additional: this.state.additional}
+    $.post('/api/wines', option, (list) => {
       // this.setState()
       console.log(list);
     })
