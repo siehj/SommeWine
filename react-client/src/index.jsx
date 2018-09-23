@@ -68,7 +68,6 @@ class App extends React.Component {
   }
 
   getQuery(e) {
-    // console.log(e.target.name);
     if (e.target.name === 'query') {
       this.setState({query: e.target.value});
     } else {
@@ -86,8 +85,8 @@ class App extends React.Component {
     //should be a get but works better as a post for the purposes of this...
     let option = { query: this.state.query, additional: this.state.additional}
     $.post('/api/wines', option, (list) => {
-      // this.setState()
-      console.log(list);
+      this.setState({wines: list});
+      this.setState({query: ''});
     })
   }
 
@@ -95,7 +94,7 @@ class App extends React.Component {
     return (<div>
       <h1>SommeWine</h1>
       {this.state.isLoggedIn ?
-        <Dashboard username={this.state.username} query={this.getQuery.bind(this)} search={this.handleSearch.bind(this)} />
+        <Dashboard username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
         :
         <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />}
     </div>)

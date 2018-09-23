@@ -7,17 +7,26 @@ const Search = (props) => {
       <h2 className="tabTitle">Search</h2>
       <div className="searchMain">
         <div className="searchForm">
-          <form action="" method="post">
-            <input type="text" name="query" onChange={props.query} />
-            <input type="button"  value="Search" onClick={props.search} />
+          <input type="text" className="queryBox"  name="query" value={props.q} onChange={props.query} />
+          {props.showAdv ? <Preferences close={props.close} changePref={props.query} /> : ('')}
+          <div className="queryBtns" >
+            <input type="button" value="Search" onClick={props.search} />
             <input type="button" value="Advanced Search" onClick={props.advMenu} />
-            {props.showAdv ? <Preferences close={props.close} changePref={props.query} /> : ('')}
-          </form>
+          </div>
         </div>
         <div className="searchResults">
           <h3>Results:</h3>
-          
-      </div>
+          {props.searchResults.map((wine, i) => {
+            return (
+              <div className="result" key={i}>
+                <a>Name: {wine.name}</a>
+                <a>Region: {wine.region}  Vineyard: {wine.vineyard}</a>
+                <a>Type: {wine.type}</a>
+                <a>Rating: {wine.rating}  Price: {wine.price}</a>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

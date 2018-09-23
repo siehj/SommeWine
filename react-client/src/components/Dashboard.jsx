@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
   
     $.get('/db/userData', {username: this.props.username}, (data) => {
-      console.log(data);
+      // console.log(data);
     })
   }
 
@@ -57,7 +57,7 @@ class Dashboard extends React.Component {
       </div>
       </div>
       <div className="main" >
-        {this.state.curr === 'Search' ? <Search close={this.closeAdvMenu.bind(this)} advMenu={this.showAdvMenu.bind(this)} showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
+        {this.state.curr === 'Search' ? <Search q={this.props.q} close={this.closeAdvMenu.bind(this)} searchResults={this.props.searchResults} advMenu={this.showAdvMenu.bind(this)} showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
         {this.state.curr === 'Favorites' ? <Favorites/> : ('')}
         {this.state.curr === 'Profile' ? <Profile/> : ('')}
       </div>

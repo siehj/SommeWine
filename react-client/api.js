@@ -2,7 +2,7 @@ const request = require('request');
 const config = require('../config.js');
 
 const wineApi = (query, callback) => {
-  console.log(query);
+  // console.log(query);
   let options = {
     akey: config.TOKEN,
     ip: config.ip,
@@ -19,8 +19,8 @@ const wineApi = (query, callback) => {
       callback(err, null);
     } else {
       // console.log('res ', res);
-      console.log('body ', JSON.parse(body));
-      // callback()
+      // console.log('body ', JSON.parse(body).wines);
+      callback(null, JSON.parse(body).wines);
     }
   })
 }

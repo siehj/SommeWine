@@ -4,26 +4,88 @@ CREATE DATABASE sommeWine;
 
 USE sommeWine;
 
--- CREATE TABLE items (
---   id int NOT NULL AUTO_INCREMENT,
---   quantity integer NOT NULL,
---   description varchar(50) NOT NULL,
---   PRIMARY KEY (ID)
--- );
-
 CREATE TABLE wines (
   id int AUTO_INCREMENT,
   name text, 
   region text,
-  varietal text, 
-  msrp int,
+  winery text, 
+  price int,
+  vintage int,
   type text,
   link text,
   image text,
-  vintage int,
   rating int  
   PRIMARY KEY (id)
 )
+
+CREATE TABLE users (
+  id int AUTO_INCREMENT,
+  username text,
+  password text,
+  name text,
+  firstTime TINYINT(0)
+  PRIMARY KEY (id)
+)
+
+CREATE TABLE user_wines (
+  user_id int,
+  wine_id int
+)
+
+CREATE TABLE user_preferences (
+  user_id int, 
+  preference_id int
+)
+
+CREATE TABLE preferences (
+  id int AUTOINCREMENT, 
+  note text
+)
+
+INSERT INTO preferences (note) VALUES ('Red');
+INSERT INTO preferences (note) VALUES ('White');
+INSERT INTO preferences (note) VALUES ('Rose');
+INSERT INTO preferences (note) VALUES ('Sweet');
+INSERT INTO preferences (note) VALUES ('Dry');
+INSERT INTO preferences (note) VALUES ('Floral');
+INSERT INTO preferences (note) VALUES ('Fruity');
+INSERT INTO preferences (note) VALUES ('Spicy');
+INSERT INTO preferences (note) VALUES ('Nuts/Vanilla');
+INSERT INTO preferences (note) VALUES ('Woody');
+INSERT INTO preferences (note) VALUES ('France');
+INSERT INTO preferences (note) VALUES ('United States');
+INSERT INTO preferences (note) VALUES ('Argentina');
+INSERT INTO preferences (note) VALUES ('Canada');
+INSERT INTO preferences (note) VALUES ('El Salvador');
+INSERT INTO preferences (note) VALUES ('Puerto Rico');
+INSERT INTO preferences (note) VALUES ('Austria');
+INSERT INTO preferences (note) VALUES ('Belgium');
+INSERT INTO preferences (note) VALUES ('Denmark');
+INSERT INTO preferences (note) VALUES ('Estonia');
+INSERT INTO preferences (note) VALUES ('France');
+INSERT INTO preferences (note) VALUES ('Germany');
+INSERT INTO preferences (note) VALUES ('Great Britain');
+INSERT INTO preferences (note) VALUES ('Hungary');
+INSERT INTO preferences (note) VALUES ('Irelan');
+INSERT INTO preferences (note) VALUES ('Italy');
+INSERT INTO preferences (note) VALUES ('Malta');
+INSERT INTO preferences (note) VALUES ('Netherlands');
+INSERT INTO preferences (note) VALUES ('Spain');
+INSERT INTO preferences (note) VALUES ('Switzerland');
+INSERT INTO preferences (note) VALUES ('United Kingdom');
+INSERT INTO preferences (note) VALUES ('Norway');
+INSERT INTO preferences (note) VALUES ('Poland');
+INSERT INTO preferences (note) VALUES ('Portugal');
+INSERT INTO preferences (note) VALUES ('Russia');
+INSERT INTO preferences (note) VALUES ('Hong Kong');
+INSERT INTO preferences (note) VALUES ('Japan');
+INSERT INTO preferences (note) VALUES ('Malaysia');
+INSERT INTO preferences (note) VALUES ('Singapore');
+INSERT INTO preferences (note) VALUES ('Austalia');
+INSERT INTO preferences (note) VALUES ('New Zealand');
+
+
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql

@@ -1,10 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 const wineApi = require('../react-client/api.js');
-// var body = require('body-parser');
+var body = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-// var items = require('../database-mongo');
 
 var app = express();
 
@@ -44,17 +43,53 @@ app.post('/api/wines', (req, res) => {
       request.push(req.body.additional.notes[0]);
     }
   }
-  // console.log(request.join(' '));
+  // let response = [];
+  // wineApi.wineApi({query: request.join(' ')})
+  //   .then(result => {
+  //     result.map(wine => {
+  //       response.push({
+  //         name: wine.name,
+  //         region: wine.region,
+  //         winery: wine.winery,
+  //         price: wine.price,
+  //         vintage: wine.vintage,
+  //         type: wine.type,
+  //         link: wine.link,
+  //         image: wine.image,
+  //         rating: wine.rating
+  //       })
+  //     })
+  //     return response;
+  //   })
+  //   .then((response) => {
+  //     res.end(response);
+  //   })
+  //   .catch(console.log)
+  let response = [];
+
   wineApi.wineApi({
     query: request.join(' ')
   }, (err, results) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(results);
+      // console.log(results);
+      results.map(wine => {
+        response.push({
+          name: wine.name,
+          region: wine.region,
+          winery: wine.winery,
+          price: wine.price,
+          vintage: wine.vintage,
+          type: wine.type,
+          link: wine.link,
+          image: wine.image,
+          rating: wine.rating
+        })
+      })
+      res.send(response);
     }
   })
-  res.end('got it');
 })
 
 app.get('/db/userData', (req, res) => {

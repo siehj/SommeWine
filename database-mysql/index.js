@@ -1,14 +1,15 @@
 var mysql = require('mysql');
+var config = require('./config.js')
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : 'FILL_ME_IN',
-  database : 'test'
+  user     : config.dbU,
+  password : config.dbPW,
+  database : 'swDB'
 });
 
 var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
+  connection.query('SELECT * FROM items', function(err, results) {
     if(err) {
       callback(err, null);
     } else {
@@ -17,4 +18,9 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+var addUser = function(callback) {
+  connection.query('INSERT INTO users ()')
+}
+
+module.exports = {selectAll};
+
