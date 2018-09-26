@@ -5,7 +5,7 @@ var countries = require('../../../database-mysql/storedData').countries;
 const Preferences = (props) => {
   return (
     <div>
-      <h2>preferences</h2>
+      {/* <h2>preferences</h2> */}
       <div id="prefList">
         <div className="Types">
           <h3>Type:</h3>
@@ -36,21 +36,12 @@ const Preferences = (props) => {
                 <h4 key={i} >{region}</h4>
                 {countries[region].map((country, j) => {
                   return(                 
-                    <a>{country} <input key={j} onClick={props.changePref} type="checkbox" name="regions" value={country} /></a>
+                    <a key={j} >{country} <input onClick={props.changePref} type="checkbox" name="regions" value={country} /></a>
                   )
                 })}
               </div>
             )
           })}
-          {/* <a>Africa <input onClick={props.changePref} type="checkbox" name="regions" value="Africa" /></a>
-          <a>Asia <input onClick={props.changePref} type="checkbox" name="regions" value="Asia" /></a>
-          <a>Europe <input onClick={props.changePref} type="checkbox" name="regions" value="Europe" /></a>
-          <a>South America <input onClick={props.changePref} type="checkbox" name="regions" value="South America" /></a> */}
-          {/* <a>France <input onClick={props.changePref} type="checkbox" name="regions" value="France" /></a>
-          <a>Italy <input onClick={props.changePref} type="checkbox" name="regions" value="Italy" /></a>
-          <a>Japan <input onClick={props.changePref} type="checkbox" name="regions" value="Japan" /></a>
-          <a>Argentina <input onClick={props.changePref} type="checkbox" name="regions" value="Argentina" /></a>
-          <a>United States <input onClick={props.changePref} type="checkbox" name="regions" value="United States" /></a> */}
         </div>
         <br />
           <input className="close" type="button" value="Close" onClick={props.close} />

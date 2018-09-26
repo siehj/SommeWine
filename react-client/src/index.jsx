@@ -19,7 +19,8 @@ class App extends React.Component {
         types: [],
         notes: [],
         regions: []
-      }   
+      },
+      previousQ: ''  
     }
   }
 
@@ -86,6 +87,7 @@ class App extends React.Component {
     let option = { query: this.state.query, additional: this.state.additional}
     $.post('/api/wines', option, (list) => {
       this.setState({wines: list});
+      this.setState({previousQ: this.state.query});
       this.setState({query: ''});
     })
   }
@@ -94,7 +96,7 @@ class App extends React.Component {
     return (<div>
       <h1>SommeWine</h1>
       {this.state.isLoggedIn ?
-        <Dashboard username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
+        <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
         :
         <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />}
     </div>)

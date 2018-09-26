@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
         favs: [],
         prefs: [],
         profile: []
-      }
+      },
     }
   }
 
@@ -27,13 +27,31 @@ class Dashboard extends React.Component {
     })
   }
 
+  addFavorite(e) {
+    $.ajax({
+      url: "/db/favs",
+      method: "POST",
+      data: JSON.parse(e.target.name),
+      success: () => {
+        // alert(`${e.target.name} has been saved`);
+      }, 
+      error: () => {
+
+      }
+    })
+  } 
+
+  showData() {
+
+  }
+
   changeTab(e) {
     this.setState({ curr: e.target.value });
     this.setState({ showAdv: false });
   }
 
   showAdvMenu() {
-    this.setState({showAdv: true});
+    this.setState({ showAdv: true });
   }
 
   closeAdvMenu() {
@@ -57,7 +75,10 @@ class Dashboard extends React.Component {
       </div>
       </div>
       <div className="main" >
-        {this.state.curr === 'Search' ? <Search q={this.props.q} close={this.closeAdvMenu.bind(this)} searchResults={this.props.searchResults} advMenu={this.showAdvMenu.bind(this)} showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
+        {this.state.curr === 'Search' ? <Search addFav={this.addFavorite.bind(this)} 
+        prev={this.props.prev} q={this.props.q} close={this.closeAdvMenu.bind(this)} 
+        searchResults={this.props.searchResults} advMenu={this.showAdvMenu.bind(this)} 
+        showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
         {this.state.curr === 'Favorites' ? <Favorites/> : ('')}
         {this.state.curr === 'Profile' ? <Profile/> : ('')}
       </div>

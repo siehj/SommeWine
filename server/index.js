@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 const wineApi = require('../react-client/api.js');
 var body = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
+var db = require('../database-mysql');
 
 var app = express();
 
@@ -96,6 +96,15 @@ app.get('/db/userData', (req, res) => {
   // console.log(req);
   let username = req.url.split('=')[1];
   res.send();
+})
+
+app.post('/db/favs', (req, res) => {
+  console.log(req.body);
+
+  // save to the db of favs.
+
+
+  res.end();
 })
 
 app.listen(3000, function () {

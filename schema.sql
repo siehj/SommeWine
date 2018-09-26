@@ -27,9 +27,12 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 )
 
+-- essencially a user's favorite wines 
 CREATE TABLE user_wines (
   user_id int,
-  wine_id int
+  wine_id int,
+  notes text, 
+  photo text
 )
 
 CREATE TABLE user_preferences (
