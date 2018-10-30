@@ -27,7 +27,7 @@ const Search = (props) => {
             <option value="expensive">$$$$ &rarr; $</option>
           </select> */}
           
-          {/* {props.searchResults.slice(0, 10).map((wine, i) => {
+          {props.searchResults.slice(0, 10).map((wine, i) => {
             return (
               <div className="result" key={i}>
                 <div className="resultData" >
@@ -41,8 +41,8 @@ const Search = (props) => {
                 </div>
               </div>
             )
-          })} */}
-          {wines.slice(0, 10).map((wine, i) => {
+          })}
+          {/* {wines.slice(0, 10).map((wine, i) => {
             return (
               <div className="result" key={i}>
               <div className="resultData" >
@@ -56,7 +56,7 @@ const Search = (props) => {
               </div>
               </div>
             )
-          })}
+          })} */}
         </div>
       </div>
     </div>
