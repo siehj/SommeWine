@@ -1,14 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-const wineApi = require('../react-client/api.js');
+const wineApi = require('../client/api.js');
 var body = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 var db = require('../database-mysql');
 
 var app = express();
 
 // UNCOMMENT FOR REACT
-app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
