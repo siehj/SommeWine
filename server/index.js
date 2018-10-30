@@ -1,17 +1,17 @@
+require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
-const wineApi = require('../client/api.js');
+const wineApi = require('../service/api.js');
 var body = require('body-parser');
 var db = require('../database-mysql');
 
 var app = express();
+const port = process.env.PORT || 3000;
 
-// UNCOMMENT FOR REACT
+
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/items', function (req, res) {
   items.selectAll(function (err, data) {
@@ -107,6 +107,6 @@ app.post('/db/favs', (req, res) => {
   res.end();
 })
 
-app.listen(3000, function () {
-  console.log('listening on port 3000!');
-});
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}.`)
+})

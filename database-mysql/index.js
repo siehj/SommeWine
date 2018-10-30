@@ -1,10 +1,10 @@
+require('dotenv').config();
 var mysql = require('mysql');
-var config = require('../config.js');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : config.dbU,
-  password : config.dbPW,
+  user     : process.env.dbUSER,
+  password : process.env.dbPW,
   database : 'swDB'
 });
 
