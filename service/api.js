@@ -1,13 +1,12 @@
+require('dotenv').config();
 const request = require('request');
-const config = require('../config.js');
-
 const wineApi = (query, callback) => {
   // console.log(query);
   let options = {
-    akey: config.TOKEN,
-    ip: config.ip,
-    u: config.username,
-    p: config.password,
+    akey: process.env.TOKEN,
+    ip: process.env.ip,
+    u: process.env.username,
+    p: process.env.password,
     n: 20,
     q: query.query
   }
