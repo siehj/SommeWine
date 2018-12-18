@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import { Route, Link, History, BrowserRouter as Router } from 'react-router-dom';
+import LandingPage from './components/Landing.jsx';
 import List from './components/List.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Register from './components/Register.jsx';
@@ -10,8 +12,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      isLoggedIn: true,
-      username: 'Sieh',
+      isLoggedIn: false,
+      username: '',
       password: '',
       query: '',
       wines: [],
@@ -93,13 +95,21 @@ class App extends React.Component {
   }
 
   render() {
-    return (<div>
-      <h1>SommeWine</h1>
-      {this.state.isLoggedIn ?
-        <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
-        :
-        <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />}
-    </div>)
+    return (
+      <Router>
+        <div>
+
+          <Route path="/" component={LandingPage} />
+          <Route path="/login" component={Register} /> 
+          <Route path="/signup" component={Register} /> 
+          {/* <h1>SommeWine</h1> */}
+          {/* {this.state.isLoggedIn ?
+            <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
+            :
+          <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />} */}
+        </div>
+      </Router>
+    )
   }
 }
 
