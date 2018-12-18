@@ -98,10 +98,9 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-
-          <Route path="/" component={LandingPage} />
           <Route path="/login" component={Register} /> 
           <Route path="/signup" component={Register} /> 
+          <Route exact path="/" component={LandingPage} />
           {/* <h1>SommeWine</h1> */}
           {/* {this.state.isLoggedIn ?
             <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />

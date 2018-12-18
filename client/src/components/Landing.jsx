@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Link, History, BrowserRouter as Router } from 'react-router-dom';
 
-
 let LandingPage = (props) => {
   return (
     <div>
