@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt-nodejs');
+const sessions = require('express-session');
 const wineApi = require('../service/api.js');
 const body = require('body-parser');
 const db = require('../database-mysql');
@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(sessions({secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use('/', router);
 
 // app.get('/login', (req, res) => res.redirect('/'));
