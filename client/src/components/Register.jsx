@@ -37,11 +37,11 @@ class Register extends React.Component {
     return (
       <div id="register" className="text-center" >
         {this.state.currScreen === 'login' ? <h1>Login</h1> : <h1>Sign Up</h1>}
-        <Form >
+        <div className="form">
           <Label> Username: </Label> <input onChange={this.updateField} type="text" name="username" />
           <Label> Password: </Label> <input onChange={this.updateField} type="password" name="password" size="sm" />
           <button className="btn" onClick={this.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
-        </Form>
+        </div>
           <div>
             I need to { this.state.currScreen === 'login' ? <Link to='/signup'>Sign Up</Link> : <Link to='/login'>Login</Link> }.
           </div>
