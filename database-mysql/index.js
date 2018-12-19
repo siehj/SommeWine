@@ -1,12 +1,12 @@
 require('dotenv').config();
-var mysql = require('mysql');
+// var mysql = require('mysql');
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : process.env.dbUSER,
-  password : process.env.dbPW,
-  database : 'swDB'
-});
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : process.env.dbUSER,
+//   password : process.env.dbPW,
+//   database : 'swDB'
+// });
 
 var selectAll = function(callback) {
   connection.query('SELECT * FROM items', function(err, results) {
