@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import { Route, Link, History, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, Link, History, BrowserRouter, Router } from 'react-router-dom';
 import LandingPage from './components/Landing.jsx';
 import List from './components/List.jsx';
 import Dashboard from './components/Dashboard.jsx';
@@ -85,10 +85,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Route path="/login" component={Register} /> 
-          <Route path="/signup" component={Register} /> 
+      <div>
+        {/* <Router> */}
+          <Route exact path="/login" component={Register} /> 
+          <Route exact path="/signup" component={Register} /> 
           <Route exact path="/" component={LandingPage} />
           {/* <Route path="/dashboard/:username" component={Dashboard} /> */}
           {/* <h1>SommeWine</h1> */}
@@ -96,10 +96,10 @@ class App extends React.Component {
             <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
             :
           <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />} */}
+      {/* </Router> */}
         </div>
-      </Router>
     )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('app'));
