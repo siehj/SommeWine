@@ -1,0 +1,26 @@
+
+#register {
+  height: 100%;
+  padding-top: 12%;
+}
+
+input {
+  margin-right: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#register h1 {
+  font-size: 50px;
+  color: darkred;
+}
+
+/* .reg {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
+}
+
+.reg:hover {
+  background-color: darkred;
+  color: white;
+} */
