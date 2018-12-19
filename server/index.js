@@ -102,9 +102,12 @@ app.post('/db/favs', (req, res) => {
   console.log(req.body);
 
   // save to the db of favs.
-
-
   res.end();
+})
+
+app.post('/db/register', (req, res) => {
+  console.log('server Hi!')
+  console.log(req.body);
 })
 
 app.listen(port, () => {
