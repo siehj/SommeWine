@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Input, Form, FormGroup, Label } from 'reactstrap';
 import '../../dist/ComponentCss/register.css';
 
 class Register extends React.Component {
@@ -35,12 +36,12 @@ class Register extends React.Component {
   render() {
     return (
       <div id="register" className="text-center" >
-        <div className="form" >
         {this.state.currScreen === 'login' ? <h1>Login</h1> : <h1>Sign Up</h1>}
-          Username: <input onChange={this.updateField} type="text" name="username"/>
-          Password: <input onChange={this.updateField} type="password" name="password" />
-          <button className="btn" onClick={this.props.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
-        </div>
+        <Form >
+          <Label> Username: </Label> <input onChange={this.updateField} type="text" name="username" />
+          <Label> Password: </Label> <input onChange={this.updateField} type="password" name="password" size="sm" />
+          <button className="btn" onClick={this.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
+        </Form>
           <div>
             I need to { this.state.currScreen === 'login' ? <Link to='/signup'>Sign Up</Link> : <Link to='/login'>Login</Link> }.
           </div>
