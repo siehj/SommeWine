@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import LandingModal from './NestedComponents/LandingModal.jsx';
 import '../../dist/landing.css';
 
 let LandingPage = (props) => {
@@ -18,6 +19,9 @@ let LandingPage = (props) => {
       </section>
       <section className="two" >
         HI
+      </section>
+      <section className="three text-center" >
+        Bottom
       </section>
     </div>
   )

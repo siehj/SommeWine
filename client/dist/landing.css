@@ -27,7 +27,14 @@
 }
 
 .two {
-  height: 300px;
+  height: 600px;
   background-color: darkred;
 }
 
+.three {
+  height: 20px;
+}
+
+#Modal {
+  z-index: 15;
+}
