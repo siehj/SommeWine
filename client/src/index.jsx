@@ -25,9 +25,10 @@ class App extends React.Component {
         regions: []
       },
       previousQ: '', 
+      getStarted: false
       // modalStatus: false  
     }
-    // this.toggleModal = this.toggleModal.bind(this);
+    // this.toggleBtns = this.toggleBtns.bind(this);
   }
 
   componentDidMount() {
@@ -48,26 +49,6 @@ class App extends React.Component {
     $.get('/db/favorites', favs => {
       this.setState({ [userData.favs] : favs});
     })
-  }
-
-  handleRegister(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  register() {
-    // $.ajax({
-    //   url: '/db/register',
-    //   method: 'POST',
-    //   data: {
-    //     username: this.state.username,
-    //     password: this.state.password
-    //   },
-    //   success: () => {
-    //     this.setState({ isLoggedIn: true });
-    //   },
-    //   error: (console.log)
-    // })
-    this.setState({ isLoggedIn: true })
   }
 
   logout() {
@@ -98,8 +79,8 @@ class App extends React.Component {
     })
   }
 
-  // toggleModal() {
-  //   this.setState({ modalStatus: !this.state.modalStatus });
+  // toggleBtns() {
+  //   this.setState({ getStarted: !this.state.getStarted });
   // }
 
   render() {
@@ -108,7 +89,7 @@ class App extends React.Component {
         <div>
           <Route path="/login" component={Register} /> 
           <Route path="/signup" component={Register} /> 
-          <Route exact path="/" render={() => <LandingPage status={this.state.modalStatus} toggle={this.toggleModal} /> } />
+          <Route exact path="/" component={LandingPage} />
           {/* <Route path="/dashboard/:username" component={Dashboard} /> */}
           {/* <h1>SommeWine</h1> */}
           {/* {this.state.isLoggedIn ?
