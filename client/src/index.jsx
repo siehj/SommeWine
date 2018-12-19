@@ -6,6 +6,8 @@ import LandingPage from './components/Landing.jsx';
 import List from './components/List.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Register from './components/Register.jsx';
+import LandingModal from './components/NestedComponents/LandingModal.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +24,10 @@ class App extends React.Component {
         notes: [],
         regions: []
       },
-      previousQ: ''  
+      previousQ: '', 
+      // modalStatus: false  
     }
+    // this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -94,14 +98,18 @@ class App extends React.Component {
     })
   }
 
+  // toggleModal() {
+  //   this.setState({ modalStatus: !this.state.modalStatus });
+  // }
+
   render() {
     return (
       <Router>
         <div>
           <Route path="/login" component={Register} /> 
           <Route path="/signup" component={Register} /> 
-          <Route exact path="/" component={LandingPage} />
-          {/* <Route path="/:username" component={Dashboard} /> */}
+          <Route exact path="/" render={() => <LandingPage status={this.state.modalStatus} toggle={this.toggleModal} /> } />
+          {/* <Route path="/dashboard/:username" component={Dashboard} /> */}
           {/* <h1>SommeWine</h1> */}
           {/* {this.state.isLoggedIn ?
             <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
