@@ -2,22 +2,12 @@ require('dotenv').config();
 const { Client } = require('pg');
 
 const client = new Client(process.env.DATABASE_URL + '?ssl=true');
-client.connect((err) => err ? console.log(err) : console.log('connected successfully!') );
-
-// var selectAll = function(callback) {
-//   connection.query('SELECT * FROM items', function(err, results) {
-//     if(err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, results);
-//     }
-//   });
-// };
+client.connect((err) => err ? console.log(err) : console.log('connected to db successfully!') );
 
 const addUser = (user) => {
-  let { username, password, name } = user;
-  const query = `INSERT into users (username, password, name, vote) VALUES ($1, $2, $3, 1);`;
-  const params = [username, password, name];
+  let { username, password } = user;
+  const query = `INSERT into users (username, password) VALUES ($1, $2);`;
+  const params = [username, password];
   return new Promise ((resolve, reject) => {
     client.query(query, params, (err, data) => {
       if (err) reject(err);
@@ -32,6 +22,7 @@ const addUser = (user) => {
 };
 
 const checkUsername = (username) => {
+  console.log(username);
   const query = 'SELECT EXISTS (SELECT 1 FROM users WHERE username=$1);';
   const params = [username];
   return new Promise ((resolve, reject) => {
@@ -52,6 +43,7 @@ const findUser = (username) => {
       getUserInfo(username, (err, data) => {
         if (err) reject(err);
         else resolve(data[0]);
+        // else console.log(data);
       })
     });   
   })
@@ -63,6 +55,7 @@ getUserInfo = (username, callback) => {
   client.query(query, params, (err, { rows }) => {
     if(err) callback(err, null);
     else callback(null, rows);
+    // console.log(rows);
   });
 }
 // let getUserFavorites = (userId, callback) => {
