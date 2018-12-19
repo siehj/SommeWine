@@ -1,12 +1,8 @@
 require('dotenv').config();
-// var mysql = require('mysql');
+const { Client } = require('pg');
 
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : process.env.dbUSER,
-//   password : process.env.dbPW,
-//   database : 'swDB'
-// });
+const client = new Client(process.env.DATABASE_URL + '?ssl=true');
+client.connect();
 
 var selectAll = function(callback) {
   connection.query('SELECT * FROM items', function(err, results) {

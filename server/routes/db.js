@@ -1,4 +1,4 @@
-let db = require('../../database-mysql');
+let db = require('../../database-pg');
 const bcrypt = require('bcrypt-nodejs');
 
 let login = ({ username, password }) => { console.log(username)};
