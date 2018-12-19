@@ -23,6 +23,7 @@ CREATE TABLE "users" (
   "username" text,
   "password" text,
   "name" text,
+  "email" text,
   "firstTime" boolean,
   PRIMARY KEY ("id")
 );
