@@ -1,12 +1,13 @@
 require('dotenv').config();
-let express = require('express');
-let bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt-nodejs');
 const wineApi = require('../service/api.js');
-let body = require('body-parser');
-let db = require('../database-mysql');
-let router = require('./routes.js');
+const body = require('body-parser');
+const db = require('../database-mysql');
+const router = require('./routes.js');
 
-var app = express();
+let app = express();
 const port = process.env.PORT || 3000;
 
 
