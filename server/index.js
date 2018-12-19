@@ -10,10 +10,10 @@ var app = express();
 const port = process.env.PORT || 3000;
 
 
-app.use('/', router);
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/', router);
 
 // app.get('/login', (req, res) => res.redirect('/'));
 

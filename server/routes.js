@@ -5,6 +5,6 @@ let router = require('express').Router();
 // router.get('/', (req, res) => {
 
 // })
-router.post('/db', db.register)
+router.post('/db/register', db.register)
 
 module.exports = router;
