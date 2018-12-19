@@ -1,31 +1,31 @@
 DROP DATABASE IF EXISTS sommeWine;
 
-CREATE DATABASE sommeWine;
+-- CREATE DATABASE sommeWine;
 
-USE sommeWine;
+-- USE sommeWine;
 
-CREATE TABLE wines (
-  id int AUTO_INCREMENT,
-  name text, 
-  region text,
-  winery text, 
-  price int,
-  vintage int,
-  type text,
-  link text,
-  image text,
-  rating int  
-  PRIMARY KEY (id)
+CREATE TABLE "wines" (
+  "id" SERIAL,
+  "name" text, 
+  "region" text,
+  "winery" text, 
+  "price" INTEGER,
+  "vintage" INTEGER,
+  "type" text,
+  "link" text,
+  "image" text,
+  "rating" INTEGER  
+  PRIMARY KEY ("id")
 )
 
-CREATE TABLE users (
-  id int AUTO_INCREMENT,
-  username text,
-  password text,
-  name text,
-  firstTime TINYINT(0)
-  PRIMARY KEY (id)
-)
+CREATE TABLE "users" (
+  "id" SERIAL,
+  "username" text,
+  "password" text,
+  "name" text,
+  "firstTime" boolean,
+  PRIMARY KEY ("id")
+);
 
 -- essencially a user's favorite wines 
 CREATE TABLE user_wines (
