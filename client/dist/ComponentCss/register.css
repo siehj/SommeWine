@@ -17,6 +17,12 @@ input {
   color: darkred;
 }
 
+.registerError {
+  font-size: 15px;
+  color: darkred;
+  font-weight: bold;
+}
+
 label {
   font-size: 17px; 
 }

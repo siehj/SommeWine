@@ -1,33 +1,33 @@
 let db = require('../../database-pg/index.js');
 const bcrypt = require('bcrypt-nodejs');
 
-let login = ({ username, password }) => { 
+// let login = ({ username, password }) => { 
 
-  if ( !username.length || !password.length ) {
-    res.send("Either the username or password is missing");
-  } 
-  db.findUser(username)
-    .then(user => {
-      if(!user) {
-        res.send("Sorry, your login and or password are incorrect!");
-      } else {
-        console.log(user);
-        return user;
-      }
-    })
-    // .then(user => { 
-    //   bcrypt.compare(password, user.password, (err, match) => {
-    //     if (err || !match) {
-    //       res.send(["login", "Sorry, your login and or password are incorrect!"]);
-    //     } else {
-    //       req.session.loggedIn = true;
-    //       let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote, city: user.city, state: user.state };
-    //       res.send(userInfo);                  
-    //     }
-    //   })
-    // })
-    .catch(err => console.log)
-  };
+//   if ( !username.length || !password.length ) {
+//     res.send("Either the username or password is missing");
+//   } 
+//   db.findUser(username)
+//     .then(user => {
+//       if(!user) {
+//         res.send("Sorry, your login and or password are incorrect!");
+//       } else {
+//         console.log(user);
+//         return user;
+//       }
+//     })
+//     .then(user => { 
+//       bcrypt.compare(password, user.password, (err, match) => {
+//         if (err || !match) {
+//           res.send(["login", "Sorry, your login and or password are incorrect!"]);
+//         } else {
+//           req.session.loggedIn = true;
+//           let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote, city: user.city, state: user.state };
+//           res.send(userInfo);                  
+//         }
+//       })
+//     })
+//     .catch(err => console.log)
+//   };
 
 // let signup = ({ username, password }) => { 
 
@@ -45,9 +45,7 @@ let login = ({ username, password }) => {
 //         db.checkUsername(username)
 //           .then(result => {
 //             if (result) return cb("Sorry, this username is already taken");
-//             else return; 
-//           })
-//           .then(() => {
+//             else {} 
 //             let user = { username: username, password: hash };
 //             db.addUser(user)
 //               .then(newUser => {
@@ -65,6 +63,34 @@ let login = ({ username, password }) => {
 
 module.exports = {
   register: (req, res) => {
+    let login = ({ username, password }) => { 
+
+      if ( !username.length || !password.length ) {
+        res.send("Either the username or password is missing");
+      } 
+      db.findUser(username)
+        .then(user => {
+          if(!user) {
+            res.send("Sorry, your login and or password are incorrect!");
+          } else {
+            console.log(user);
+            return user;
+          }
+        })
+        .then(user => { 
+          bcrypt.compare(password, user.password, (err, match) => {
+            if (err || !match) {
+              res.send(["login", "Sorry, your login and or password are incorrect!"]);
+            } else {
+              req.session.loggedIn = true;
+              let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote, city: user.city, state: user.state };
+              res.send(userInfo);                  
+            }
+          })
+        })
+        .catch(err => console.log)
+      };
+
     let signup = ({ username, password }) => { 
 
       if ( !username.length || !password.length ) {

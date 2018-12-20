@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Input, Form, FormGroup, Label } from 'reactstrap';
 import '../../dist/ComponentCss/register.css';
 
@@ -9,7 +9,7 @@ class Register extends React.Component {
     super(props);
     this.state = {
       currScreen: this.props.location.pathname.slice(1),
-      error: '',
+      error: [],
       username: '',
       password: ''
     }
@@ -27,7 +27,13 @@ class Register extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-      .then(() => console.log('register'))
+      .then(({ data }) => {
+        // let response = data;
+        console.log(data);
+        console.log(typeof data);
+        if (typeof data === 'string') this.setState({ error: data });
+        else this.props.history.push(`/dash/${data.username}`);
+      })
       .catch(err => console.log)
 
     // this.setState({ isLoggedIn: true })
@@ -42,6 +48,7 @@ class Register extends React.Component {
           <Label> Password: </Label> <input onChange={this.updateField} type="password" name="password" size="sm" />
           <button className="btn" onClick={this.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
         </div>
+        { this.state.error.length ? <em className="registerError" >**{this.state.error}**</em> : null }
           <div>
             I need to { this.state.currScreen === 'login' ? <Link to='/signup'>Sign Up</Link> : <Link to='/login'>Login</Link> }.
           </div>
