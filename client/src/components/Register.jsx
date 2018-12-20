@@ -28,15 +28,10 @@ class Register extends React.Component {
         password: this.state.password
       })
       .then(({ data }) => {
-        // let response = data;
-        console.log(data);
-        console.log(typeof data);
         if (typeof data === 'string') this.setState({ error: data });
-        else this.props.history.push(`/dash/${data.username}`);
+        else this.props.history.push(`/dashboard/${data.username}`);
       })
       .catch(err => console.log)
-
-    // this.setState({ isLoggedIn: true })
   }
 
   render() {
