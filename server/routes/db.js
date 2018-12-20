@@ -29,47 +29,81 @@ let login = ({ username, password }) => {
     .catch(err => console.log)
   };
 
-let signup = ({ username, password }) => { 
+// let signup = ({ username, password }) => { 
 
-  if ( !username.length || !password.length ) {
-    console.log("error");
-    return "Either the username or password is missing";
-  }
+//   if ( !username.length || !password.length ) {
+//     console.log("error");
+//     cb("Either the username or password is missing", null);
+//   }
 
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, null, (err, hash) => {
-      if (err) {
-        console.log(err);
-      } else {
-        // check if username is taken in the db
-        console.log('db', db);
-        db.checkUsername(username)
-          .then(result => {
-            if (result) "Sorry, this username is already taken";
-            else return; 
-          })
-          .then(() => {
-            let user = { username: username, password: hash };
-            db.addUser(user)
-              .then(newUser => {
-                // let userInfo = { id: newUser[0].id, };
-                return newUser;
-              })
-          })
-          .catch(err => console.log(err))
-      }
-    })
-  })
+//   bcrypt.genSalt(10, (err, salt) => {
+//     bcrypt.hash(password, salt, null, (err, hash) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         // check if username is taken in the db
+//         db.checkUsername(username)
+//           .then(result => {
+//             if (result) return cb("Sorry, this username is already taken");
+//             else return; 
+//           })
+//           .then(() => {
+//             let user = { username: username, password: hash };
+//             db.addUser(user)
+//               .then(newUser => {
+//                 let userInfo = { username: newUser[0].username };
+//                 cb(userInfo);
+//               })
+//               .catch(err => console.log(err));
+//           })
+//           .catch(err => console.log(err));
+//       }
+//     });
+//   });
 
- };
+//  };
 
 module.exports = {
   register: (req, res) => {
+    let signup = ({ username, password }) => { 
+
+      if ( !username.length || !password.length ) {
+        console.log("error");
+        cb("Either the username or password is missing", null);
+      }
+    
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, null, (err, hash) => {
+          if (err) {
+            console.log(err);
+          } else {
+            // check if username is taken in the db
+            db.checkUsername(username)
+              .then(result => {
+                if (result) res.send("Sorry, this username is already taken");
+                else {
+                  let user = { username: username, password: hash };
+                  db.addUser(user)
+                  .then(newUser => {
+                    let userInfo = { username: newUser[0].username };
+                    res.send(userInfo);
+                  })
+                  .catch(err => console.log(err));
+                } 
+              })
+              .catch(err => console.log(err));
+          }
+        });
+      });
+    
+     };
+    
     req.body.intent === 'login' ? 
-    login(req.body).then(() => res.send())
+    login(req.body, () => res.send())
     : 
-    signup(req.body).then(userInfo => res.send(''))
-    // res.end();
+    signup(req.body);
+
+
   },
 
 };

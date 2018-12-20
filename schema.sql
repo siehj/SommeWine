@@ -24,9 +24,9 @@ CREATE TABLE "users" (
   "password" text,
   "name" text,
   "email" text,
-  "firstTime" boolean,
   PRIMARY KEY ("id")
 );
+  -- "firstTime" boolean,
 
 -- essencially a user's favorite wines 
 CREATE TABLE user_wines (

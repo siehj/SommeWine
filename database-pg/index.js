@@ -22,7 +22,6 @@ const addUser = (user) => {
 };
 
 const checkUsername = (username) => {
-  console.log(username);
   const query = 'SELECT EXISTS (SELECT 1 FROM users WHERE username=$1);';
   const params = [username];
   return new Promise ((resolve, reject) => {
