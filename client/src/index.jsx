@@ -90,7 +90,7 @@ class App extends React.Component {
           <Route exact path="/login" component={Register} /> 
           <Route exact path="/signup" component={Register} /> 
           <Route exact path="/" component={LandingPage} />
-          <Route path="/dash" component={Dashboard} />
+          <Route path="/dashboard/:username" component={Dashboard} />
           {/* <Route path="/dashboard/:username" component={Dashboard} /> */}
           {/* <h1>SommeWine</h1> */}
           {/* {this.state.isLoggedIn ?

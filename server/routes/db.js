@@ -73,17 +73,17 @@ module.exports = {
           if(!user) {
             res.send("Sorry, your login and or password are incorrect!");
           } else {
-            console.log(user);
+            // console.log(user);
             return user;
           }
         })
         .then(user => { 
           bcrypt.compare(password, user.password, (err, match) => {
             if (err || !match) {
-              res.send(["login", "Sorry, your login and or password are incorrect!"]);
+              res.send("Sorry, your login and or password are incorrect!");
             } else {
               req.session.loggedIn = true;
-              let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote, city: user.city, state: user.state };
+              let userInfo = { username: user.username };
               res.send(userInfo);                  
             }
           })
