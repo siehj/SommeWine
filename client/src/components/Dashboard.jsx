@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../dist/ComponentCss/dashboard.css';
 // import Search from './Search.jsx';
 // import Favorites from './Favorites.jsx';
 import Profile from './Profile.jsx';
@@ -86,7 +87,7 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
         {/* <input type="button" value="Logout"/> */}
-        <Row>
+        {/* <Row>
           <Col>
             <div className="tabs">
             {this.state.tabs.map((tab) => {
@@ -98,7 +99,7 @@ class Dashboard extends React.Component {
             }
             </div>
           </Col>
-        </Row>
+        </Row> */}
         {/* </Container>   */}
       </div>
       <div className="main" >
