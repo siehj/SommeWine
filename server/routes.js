@@ -13,7 +13,7 @@ router.get('/*', (req, res) => {
 })
 
 // router.get('/dashboard/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+//   req.redirect('/')
 // })
 
 router.get('/logout', (req, res) => {
