@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sessions({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 app.use('/', router);
-
 // app.get('/login', (req, res) => res.redirect('/'));
 
 // app.get('/items', function (req, res) {
