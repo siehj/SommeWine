@@ -14,6 +14,7 @@ class Register extends React.Component {
       password: ''
     }
     this.updateField = this.updateField.bind(this);
+    this.changeScreen = this.changeScreen.bind(this);
     this.register = this.register.bind(this);
   }
 
@@ -29,9 +30,16 @@ class Register extends React.Component {
       })
       .then(({ data }) => {
         if (typeof data === 'string') this.setState({ error: data });
-        else this.props.history.push(`/dashboard/${data.username}`);
+        else {
+          localStorage.setItem('auth', data.username)
+          this.props.history.push(`/dashboard/${data.username}`);
+        }
       })
       .catch(err => console.log)
+  }
+
+  changeScreen(value) {
+    this.setState({ currScreen: value });
   }
 
   render() {
@@ -45,7 +53,7 @@ class Register extends React.Component {
         </div>
         { this.state.error.length ? <em className="registerError" >**{this.state.error}**</em> : null }
           <div>
-            I need to { this.state.currScreen === 'login' ? <Link to='/signup'>Sign Up</Link> : <Link to='/login'>Login</Link> }.
+            I need to { this.state.currScreen === 'login' ? <Link to='/signup' onClick={() => this.changeScreen('signup')} >Sign Up</Link> : <Link to='/login' onClick={() => this.changeScreen('login')} >Login</Link> }.
           </div>
             <Link to="/" >Cancel</Link>
       </div>

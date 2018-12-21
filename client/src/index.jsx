@@ -29,7 +29,7 @@ class App extends React.Component {
       getStarted: false
       // modalStatus: false  
     }
-    // this.toggleBtns = this.toggleBtns.bind(this);
+    // this.toggleBtns = this.toggleBtns.bind(this);'
   }
 
   componentDidMount() {
@@ -84,13 +84,22 @@ class App extends React.Component {
   //   this.setState({ getStarted: !this.state.getStarted });
   // }
 
+  check() {
+    axios.get(`/auth?user=${username}`)
+      .then(res => console.log(res));
+  }
+
   render() {
     return (
       <div>
-        <Route exact path="/login" component={Register} /> 
-        <Route exact path="/signup" component={Register} /> 
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/dashboard/*" component={Dashboard} />
+        <Switch>
+          <Route exact path="/login" component={Register} /> 
+          <Route exact path="/signup" component={Register} /> 
+          <Route exact path="/" component={LandingPage} />
+          {/* <Route path="/dashboard/*" component={Dashboard} /> */}
+          <Route path="/dashboard/*" component={ProtectedRoute} />
+        </Switch>
+
         {/* <Switch>
           <ProtectedRoute path="/dashboard/*" />
         </Switch> */}
