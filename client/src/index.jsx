@@ -6,6 +6,7 @@ import LandingPage from './components/Landing.jsx';
 import List from './components/List.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Register from './components/Register.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import LandingModal from './components/NestedComponents/LandingModal.jsx';
 
 
@@ -86,18 +87,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Router> */}
-          <Route exact path="/login" component={Register} /> 
-          <Route exact path="/signup" component={Register} /> 
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/dashboard/:username" component={Dashboard} />
-          {/* <Route path="/dashboard/:username" component={Dashboard} /> */}
-          {/* <h1>SommeWine</h1> */}
-          {/* {this.state.isLoggedIn ?
-            <Dashboard prev={this.state.previousQ} username={this.state.username} query={this.getQuery.bind(this)} q={this.state.query} search={this.handleSearch.bind(this)} searchResults={this.state.wines} />
-            :
-          <Register un={this.state.username} pw={this.state.password} change={this.handleRegister.bind(this)} register={this.register.bind(this)} />} */}
-      {/* </Router> */}
+        <Route exact path="/login" component={Register} /> 
+        <Route exact path="/signup" component={Register} /> 
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/dashboard/*" component={Dashboard} />
+        {/* <Switch>
+          <ProtectedRoute path="/dashboard/*" />
+        </Switch> */}
         </div>
     )
   }
