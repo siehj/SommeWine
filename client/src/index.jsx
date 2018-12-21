@@ -97,7 +97,7 @@ class App extends React.Component {
           <Route exact path="/signup" component={Register} /> 
           <Route exact path="/" component={LandingPage} />
           {/* <Route path="/dashboard/*" component={Dashboard} /> */}
-          <Route path="/dashboard/*" component={ProtectedRoute} />
+          <ProtectedRoute path="/dashboard/*" component={Dashboard} />
         </Switch>
 
         {/* <Switch>
