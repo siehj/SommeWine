@@ -31,7 +31,7 @@ class Register extends React.Component {
       .then(({ data }) => {
         if (typeof data === 'string') this.setState({ error: data });
         else {
-          localStorage.setItem('auth', data.username)
+          sessionStorage.setItem('auth', data.username)
           this.props.history.push(`/dashboard/${data.username}`);
         }
       })
