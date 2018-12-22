@@ -4,11 +4,7 @@ const db = require('./routes/db.js');
 const api = require('./routes/api');
 const path = require('path');
 
-const isAuthenticated = (req, res, next) => {
-  req.session.user ? next() : next();
-}
-
-router.get('/*', isAuthenticated, (req, res) => {
+router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => err ? res.redirect('/'): null)
 });
 
@@ -18,7 +14,6 @@ router.post('/logout', (req, res) => {
   req.session = null;
   res.end();
 })
-
 
 router.post('/db/register', db.register)
 
