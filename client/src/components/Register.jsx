@@ -9,7 +9,7 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currScreen: this.props.location.pathname.slice(1),
+      currScreen: 'login',
       error: [],
       username: '',
       password: ''

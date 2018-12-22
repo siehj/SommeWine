@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import auth from '../../service/auth.js';
 import { Route, Switch, Link, History, BrowserRouter, Router, Redirect } from 'react-router-dom';
 import LandingPage from './components/Landing.jsx';
 import List from './components/List.jsx';
@@ -33,6 +34,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // auth.persistUser().then(({ data }) => console.log(data));
     // $.ajax({
     //   url: '/items',
     //   success: (data) => {
@@ -96,7 +98,6 @@ class App extends React.Component {
           <Route exact path="/login" component={Register} /> 
           <Route exact path="/signup" component={Register} /> 
           <Route exact path="/" component={LandingPage} />
-          {/* <ProtectedRoute path="/dashboard/:user" component={Dashboard} /> */}
           <ProtectedRoute exact path="/dashboard/*" component={Dashboard} />
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Redirect to='/' />
