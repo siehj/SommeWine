@@ -17,7 +17,12 @@ const authCheck = () => {
 };
 
 const persistUser = () => {
-  return sessionStorage.getItem('auth').length ? axios.post(`/persist`, { user: sessionStorage.getItem('auth') }) : false;
+  if(sessionStorage.getItem('auth')) {
+    return sessionStorage.getItem('auth').length ? axios.post(`/persist`, { user: sessionStorage.getItem('auth') }) : false;
+  }
+  else {
+    return false;
+  } 
 }
 
 module.exports = { authenticate, authCheck, persistUser };

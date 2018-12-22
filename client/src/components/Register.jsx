@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import auth from '../../../service/auth.js';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Form, FormGroup, Label } from 'reactstrap';
 import '../../dist/ComponentCss/register.css';
@@ -23,8 +24,7 @@ class Register extends React.Component {
   }
 
   componentDidMount() {
-    console.log(sessionStorage);
-    axios.get('/persist')
+    auth.persistUser() ? this.props.history.push(`/dashboard/${sessionStorage.getItem('auth')}`) : null;
   }
 
   register() {
