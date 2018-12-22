@@ -29,11 +29,11 @@ class Dashboard extends React.Component {
     // if user is accessing the url /dashboard directly but their cookie still exists, then this will add the username to the url
     let stateObj = { username: localStorage.getItem('auth') }
     history.replaceState(stateObj, 'user url', `/dashboard/${localStorage.getItem('auth')}`);
-    this.setState({ user: localStorage.getItem('auth') })
+    this.setState({ user: localStorage.getItem('auth') }, () => axios.post(`/server/session/`))
     // history.push(`/dashboard/${localStorage.getItem('auth')}`);
-    // axios.get('/server/session')
+    
     // $.get('/db/userData', {username: this.props.username}, (data) => {
-      // console.log(data);
+    //   console.log(data);
     // })
   }
 

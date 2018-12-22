@@ -96,8 +96,8 @@ class App extends React.Component {
           <Route exact path="/login" component={Register} /> 
           <Route exact path="/signup" component={Register} /> 
           <Route exact path="/" component={LandingPage} />
-          <ProtectedRoute path="/dashboard/:user" component={Dashboard} />
-          <ProtectedRoute path="/dashboard/*" component={Dashboard} />
+          {/* <ProtectedRoute path="/dashboard/:user" component={Dashboard} /> */}
+          <ProtectedRoute exact path="/dashboard/*" component={Dashboard} />
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Redirect to='/' />
         </Switch>
