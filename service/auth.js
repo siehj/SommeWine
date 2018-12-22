@@ -11,9 +11,13 @@ const authCheck = () => {
   let url = window.location.href.split('/')
   let givenUser = url[url.length - 1];
   if (givenUser === sessionStorage.getItem('auth')) return true;
-  else axios.get(`/auth?user=${givenUser}`).then(({ data }) => {
+  else axios.get(`/auth?user=${sessionStorage.getItem('auth')}`).then(({ data }) => {
     return data
   });
 };
 
-module.exports = { authenticate, authCheck };
+const persistUser = () => {
+  return sessionStorage.getItem('auth').length ? axios.post(`/persist`, { user: sessionStorage.getItem('auth') }) : false;
+}
+
+module.exports = { authenticate, authCheck, persistUser };

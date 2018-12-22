@@ -12,17 +12,7 @@ router.get('/*', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => err ? res.redirect('/'): null)
 });
 
-router.get('/dashboard*', isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => err ? res.redirect('/'): null)
-});
-
-router.post('/server/session', (req, res) => {
-  // console.log(req.params);
-  console.log(req.session);
-});
-// router.get('/dashboard/*', (req, res) => {
-//   req.redirect('/')
-// })
+router.post('/persist', db.persist);
 
 router.get('/logout', (req, res) => {
   console.log(req.session)

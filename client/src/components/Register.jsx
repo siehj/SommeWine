@@ -22,6 +22,11 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  componentDidMount() {
+    console.log(sessionStorage);
+    axios.get('/persist')
+  }
+
   register() {
     axios.post('/db/register', {
         intent: this.state.currScreen,

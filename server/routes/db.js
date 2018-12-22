@@ -72,6 +72,22 @@ module.exports = {
     : 
     signup(req.body);
   },
+  persist : (req, res) => {
+    //this will see if the user exists,
+      // if not, then they will not persist user. return false; 
+      // if they do exist, then get the user info to start a session in the db for them. return true;
+    let user = req.body.user;
+    db.checkUsername(user)
+      .then(result => {
+        result ? 
+        db.findUser(user)
+          .then(userInfo => {
+            req.session.user = { username: userInfo.username, userId: userInfo.id };
+            res.send(result);
+          })
+        : res.send(result)
+      }) 
+  }
 
 
 
