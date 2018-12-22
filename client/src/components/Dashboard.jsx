@@ -23,13 +23,16 @@ class Dashboard extends React.Component {
         profile: []
       },
     }
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
     // if user is accessing the url /dashboard directly but their cookie still exists, then this will add the username to the url
-    let stateObj = { username: localStorage.getItem('auth') }
-    history.replaceState(stateObj, 'user url', `/dashboard/${localStorage.getItem('auth')}`);
-    this.setState({ user: localStorage.getItem('auth') }, () => axios.post(`/server/session/`))
+    // console.log(sessionStorage)
+    let stateObj = { username: sessionStorage.getItem('auth') }
+    history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
+    this.setState({ user: sessionStorage.getItem('auth') });
+
     // history.push(`/dashboard/${localStorage.getItem('auth')}`);
     
     // $.get('/db/userData', {username: this.props.username}, (data) => {
@@ -68,6 +71,11 @@ class Dashboard extends React.Component {
     this.setState({ showAdv: false });
   }
 
+  logout() {
+    sessionStorage.removeItem('auth');
+    axios.post('/logout').then(() => console.log("Thank you for using SommeWine"));
+  }
+
   render() {
     return (
       <div id="dashboard">
@@ -83,7 +91,9 @@ class Dashboard extends React.Component {
             <h3>Welcome back {this.state.user},</h3>
           </Col>
           <Col xs="1" sm="1" md="1" lg="1" >
-            <Button size="sm" >Logout</Button>
+            <Link to="/">
+              <Button size="sm" onClick={this.logout} >Logout</Button>
+            </Link>
           </Col>
         </Row>
         {/* <input type="button" value="Logout"/> */}

@@ -14,12 +14,9 @@ router.get('/*', isAuthenticated, (req, res) => {
 
 router.post('/persist', db.persist);
 
-router.get('/logout', (req, res) => {
-  console.log(req.session)
+router.post('/logout', (req, res) => {
   req.session = null;
-  console.log(req.session)
- 
-  res.redirect('/');
+  res.end();
 })
 
 
