@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../dist/ComponentCss/dashboard.css';
 import Routes from './DashComponents/ComponentRoutes.jsx';
+import Search from './DashComponents/Search.jsx';
+import Favorites from './DashComponents/Favorites.jsx';
+import Profile from './DashComponents/Profile.jsx';
 import { Route, Redirect, Link, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
@@ -11,7 +14,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      curr: 'Search',
+      curr: 'Profile',
       tabs: ['Search', 'Favorites', 'Profile'],
       showAdv: false,
       user: '',
@@ -22,6 +25,7 @@ class Dashboard extends React.Component {
       },
     }
     this.logout = this.logout.bind(this);
+    this.changeTab = this.changeTab.bind(this);
   }
 
   componentDidMount() {
@@ -54,8 +58,8 @@ class Dashboard extends React.Component {
 
   }
 
-  changeTab(e) {
-    this.setState({ curr: e.target.value }, () => console.log(this.state.curr));
+  changeTab(tabName) {
+    this.setState({ curr: tabName });
     this.setState({ showAdv: false });
   }
 
@@ -87,28 +91,13 @@ class Dashboard extends React.Component {
           <h3 className="welcome" >Welcome back <em>{this.state.user}</em>,</h3>
             <div className="tabs">
               {this.state.tabs.map((tab) => {
-                // if (tab !== this.state.curr) {
-                  return <a className="tabBtn" value={tab} key={tab} size="md" onClick={this.changeTab.bind(this)} >{tab}</a>
-                // }
-                // return <a key={tab}>{tab}</a>
+                  return <a className="tabBtn" value={tab} key={tab} onClick={() => this.changeTab(tab)} >{tab}</a>
                 })
               }
             </div>
         </div>
-      <div className="main" >
+      <div id="main" >
         <Routes component={this.state.curr} /> 
-        {/* <Switch>
-          <Route path="/search" component={Search} />
-          <Route path="/favorite" component={Favorites} />
-          <Route path="/profile" component={Profile} /> 
-        </Switch> */}
-        {/* {this.state.curr === 'Search' ? <Search addFav={this.addFavorite.bind(this)} 
-        prev={this.props.prev} q={this.props.q} close={this.closeAdvMenu.bind(this)} 
-        searchResults={this.props.searchResults} advMenu={this.showAdvMenu.bind(this)} 
-        showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
-        {this.state.curr === 'Favorites' ? <Favorites/> : ('')}
-        {this.state.curr === 'Profile' ? <Profile/> : ('')} */}
-        
       </div>
     </div>
     )

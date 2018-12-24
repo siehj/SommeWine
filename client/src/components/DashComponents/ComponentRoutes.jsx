@@ -4,12 +4,9 @@ import Favorites from './Favorites.jsx';
 import Profile from './Profile.jsx';
 
 const Routes = (props) => {
-  console.log(props)
-  return (
-    <div> 
-      < props.component />
-    </div>
-  )
+  if (props.component === 'Search') return <Search /> 
+  if (props.component === 'Favorites') return <Favorites /> 
+  if (props.component === 'Profile') return <Profile /> 
 }
 
 export default Routes;

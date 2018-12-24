@@ -40,14 +40,19 @@
 
 .tabBtn {
   margin-left: 10px;
+  font-size: 20px;
 }
 
 .tabTitle {
   text-align: center;
   font-size: 35px;
-  background-color: darkred;
-  color: white;
+  color: darkred;
+  padding-top: 20px;
   padding-bottom: 30px;
+  text-decoration: underline;
 }
 
+#main {
+  height: 100%;
+}
 
