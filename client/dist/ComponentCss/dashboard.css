@@ -2,3 +2,52 @@
 #dashboard {
   height: 100vh;
 }
+
+#nav {
+  background-color: darkred;
+  color: white;
+  height: 45%;
+}
+
+#dashboardTitle {
+  font-size: 80px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+#dashboardTitle em {
+  padding-left: 80px;
+  /* text-decoration: underline; */
+}
+
+.logoutDiv {
+  margin-top: 20px;
+  margin-right: 20px;
+  float: right;
+  position: relative;
+}
+
+.welcome {
+  padding-left: 5%;
+}
+
+.tabs {
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+
+.tabBtn {
+  margin-left: 10px;
+}
+
+.tabTitle {
+  text-align: center;
+  font-size: 35px;
+  background-color: darkred;
+  color: white;
+  padding-bottom: 30px;
+}
+
+

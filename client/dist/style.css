@@ -7,43 +7,6 @@ body {
   height: 100vh;
 }
 
-em {
-  font-size: 80px;
-  padding-top: 20px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-
-h3 {
-  padding-top: 20px;
-}
-.nav {
-  background-color: darkred;
-  color: white;
-  height: 40%;
-}
-.container {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.tabs {
-  text-align: center;
-  padding-bottom: 5px;
-}
-
-.t {
-  margin-left: 10px;
-}
-
-.tabTitle {
-  text-align: center;
-  font-size: 35px;
-  background-color: darkred;
-  color: white;
-  padding-bottom: 30px;
-}
-
 .searchMain {
   padding-top: 10px;
 }

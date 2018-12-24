@@ -1,8 +1,6 @@
 import React from 'react';
 import '../../dist/ComponentCss/dashboard.css';
-// import Search from './Search.jsx';
-// import Favorites from './Favorites.jsx';
-import Profile from './Profile.jsx';
+import Routes from './DashComponents/ComponentRoutes.jsx';
 import { Route, Redirect, Link, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
@@ -33,8 +31,6 @@ class Dashboard extends React.Component {
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
 
-    // history.push(`/dashboard/${localStorage.getItem('auth')}`);
-    
     // $.get('/db/userData', {username: this.props.username}, (data) => {
     //   console.log(data);
     // })
@@ -59,7 +55,7 @@ class Dashboard extends React.Component {
   }
 
   changeTab(e) {
-    this.setState({ curr: e.target.value });
+    this.setState({ curr: e.target.value }, () => console.log(this.state.curr));
     this.setState({ showAdv: false });
   }
 
@@ -79,46 +75,40 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div id="dashboard">
-      <div className="nav">
-      {/* <Container> */}
-        <Row>
-          <Col className="text-center" xs="12" sm="12" md="12" lg="12" ><em>SommeWine</em></Col>
-        </Row>
-        {/* <h1>SommeWine</h1> */}
-        {/* <Row  ><h2>Welcome back {this.props.username},</h2></Row> */}
-        <Row>
-          <Col className="text-left" xs="11" sm="11" md="11" lg="11" xl="11" >
-            <h3>Welcome back {this.state.user},</h3>
-          </Col>
-          <Col xs="1" sm="1" md="1" lg="1" >
+        <div id="nav">
+          <div className="logoutDiv" >
             <Link to="/">
-              <Button size="sm" onClick={this.logout} >Logout</Button>
+              <Button onClick={this.logout} >Logout</Button>
             </Link>
-          </Col>
-        </Row>
-        {/* <input type="button" value="Logout"/> */}
-        {/* <Row>
-          <Col>
+          </div>
+          <div id="dashboardTitle" >
+            <em >SommeWine</em>
+          </div>
+          <h3 className="welcome" >Welcome back <em>{this.state.user}</em>,</h3>
             <div className="tabs">
-            {this.state.tabs.map((tab) => {
-              if (tab !== this.state.curr) {
-                return (
-                  <Button className="t" value={tab} key={tab} size="sm" onClick={this.changeTab.bind(this)} >{tab}</Button>
-                )}
-              })
-            }
+              {this.state.tabs.map((tab) => {
+                // if (tab !== this.state.curr) {
+                  return <a className="tabBtn" value={tab} key={tab} size="md" onClick={this.changeTab.bind(this)} >{tab}</a>
+                // }
+                // return <a key={tab}>{tab}</a>
+                })
+              }
             </div>
-          </Col>
-        </Row> */}
-        {/* </Container>   */}
-      </div>
+        </div>
       <div className="main" >
+        <Routes component={this.state.curr} /> 
+        {/* <Switch>
+          <Route path="/search" component={Search} />
+          <Route path="/favorite" component={Favorites} />
+          <Route path="/profile" component={Profile} /> 
+        </Switch> */}
         {/* {this.state.curr === 'Search' ? <Search addFav={this.addFavorite.bind(this)} 
         prev={this.props.prev} q={this.props.q} close={this.closeAdvMenu.bind(this)} 
         searchResults={this.props.searchResults} advMenu={this.showAdvMenu.bind(this)} 
         showAdv={this.state.showAdv} query={this.props.query} search={this.props.search} /> : ('')}
         {this.state.curr === 'Favorites' ? <Favorites/> : ('')}
         {this.state.curr === 'Profile' ? <Profile/> : ('')} */}
+        
       </div>
     </div>
     )

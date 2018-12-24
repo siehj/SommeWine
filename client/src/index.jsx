@@ -4,11 +4,10 @@ import $ from 'jquery';
 import auth from '../../service/auth.js';
 import { Route, Switch, Link, History, BrowserRouter, Router, Redirect } from 'react-router-dom';
 import LandingPage from './components/Landing.jsx';
-import List from './components/List.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Register from './components/Register.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import LandingModal from './components/NestedComponents/LandingModal.jsx';
+import LandingModal from './components/LandingModal.jsx';
 
 
 class App extends React.Component {
