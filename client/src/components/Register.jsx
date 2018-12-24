@@ -54,7 +54,7 @@ class Register extends React.Component {
         <div className="form">
           <Label> Username: </Label> <input onChange={this.updateField} type="text" name="username" />
           <Label> Password: </Label> <input onChange={this.updateField} type="password" name="password" size="sm" />
-          <button className="btn" onClick={this.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
+          <button className="btns" onClick={this.register} > {this.state.currScreen === 'login' ? 'Login' : 'Sign Up' } </button>
         </div>
         { this.state.error.length ? <em className="registerError" >**{this.state.error}**</em> : null }
           <div>

@@ -12,7 +12,7 @@ let LandingPage = (props) => {
         </h1>
         <div className="slide-fwd-bottom text-center" >
           <Link to="/login">
-            <button className="btn" >Get Started</button>
+            <button className="btns" >Get Started</button>
           </Link>
           
           {/* <Link to="/login">Login</Link> |  <Link to="/signup">SignUp</Link> */}

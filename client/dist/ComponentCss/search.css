@@ -1,0 +1,31 @@
+
+.searchMain {
+  padding-top: 10px;
+}
+.searchForm {
+  height: 150%;
+  /* top: 285px; */
+  /* bottom: 0px; */
+  left: 15px;
+  width: 35%;
+  position: absolute;
+  border-right-color: gray;
+  border-right-style: solid;
+  border-right-width: 2px;
+}
+
+/* .queryBox {
+  display: inline;
+  flex-direction: row;
+} */
+
+.queryBox input {
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 80%; */
+}
+
+/* .queryBox button {
+  float: right;
+} */

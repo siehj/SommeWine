@@ -7,21 +7,6 @@ body {
   height: 100vh;
 }
 
-.searchMain {
-  padding-top: 10px;
-}
-.searchForm {
-  height: 150%;
-  /* top: 285px; */
-  /* bottom: 0px; */
-  left: 15px;
-  width: 35%;
-  position: absolute;
-  border-right-color: gray;
-  border-right-style: solid;
-  border-right-width: 2px;
-}
-
 .searchResults {
   right: 0px;
   margin-left: 30px;

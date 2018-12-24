@@ -37,10 +37,14 @@
   padding-bottom: 5px;
 }
 
+#main {
+  height: 100%;
+}
 
 .tabBtn {
-  margin-left: 10px;
+  margin-left: 15px;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .tabTitle {
@@ -48,11 +52,9 @@
   font-size: 35px;
   color: darkred;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   text-decoration: underline;
 }
 
-#main {
-  height: 100%;
-}
+
 
