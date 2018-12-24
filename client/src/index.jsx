@@ -71,15 +71,6 @@ class App extends React.Component {
     }
   }
 
-  handleSearch() {
-    //should be a get but works better as a post for the purposes of this...
-    let option = { query: this.state.query, additional: this.state.additional}
-    $.post('/api/wines', option, (list) => {
-      this.setState({wines: list});
-      this.setState({previousQ: this.state.query});
-      this.setState({query: ''});
-    })
-  }
 
   // toggleBtns() {
   //   this.setState({ getStarted: !this.state.getStarted });

@@ -13,10 +13,12 @@ class Search extends React.Component {
       wines: [],
       advancedSearch: false,
     };
-    this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
+
     this.updateQuery = this.updateQuery.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
   }
-  componentDidMount() { console.log(wines) }
+  // componentDidMount() { console.log(wines) }
 
   toggleAdvMenu() {
     this.setState({ showAdv: !this.state.advancedSearch });
@@ -27,7 +29,12 @@ class Search extends React.Component {
   }
 
   handleSearch() {
-
+    let option = { query: this.state.query, additional: this.state.additional}
+    $.post('/api/wines', option, (list) => {
+      this.setState({ wines: list });
+      // this.setState({ previousQ: this.state.query });
+      this.setState({ query: '' });
+    })
   }
 
   render() {
@@ -35,6 +42,7 @@ class Search extends React.Component {
       <div>
         <h2 className="tabTitle">Search</h2>
           <InputGroup className="queryBox" >
+            <InputGroupAddon addonType="prepend">Advanced</InputGroupAddon>
             <Input name="query" value={this.state.query} onChange={this.updateQuery} /> 
             <InputGroupAddon addonType="append">
               <Button outline >Search</Button>
@@ -42,8 +50,22 @@ class Search extends React.Component {
           </InputGroup>
           <div className="searchMain">
             { this.state.showAdv ? <SearchNav /> : null }
-            
+            <div className="result">
+              {wines.slice(0, 10).map((wine, i) => {
+                return (
+                <div className="resultData" key={i} >
+                  <em>{wine.name}</em>  <a>Price: ${wine.price}</a>
+                  {/* <a className="heart" name={JSON.stringify(wine)} value="false" >&#9825;</a> */}
+                  <br />
+                  <a>Region: {wine.region} </a>
+                  <br />
+                  <a>Type: {wine.type}</a>
+                  <br />
+                </div>
+              )
+            })}
           </div>
+        </div>
       </div>
     )
   }

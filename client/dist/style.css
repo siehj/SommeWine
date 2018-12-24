@@ -35,51 +35,7 @@ body {
   margin-top: 20px;
 }
 
-/* SEARCH COMPONENT */
 
-.result em {
-  font-size: 20px;
-  font-weight: bold;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.result {
-  border-top-style: solid;
-  border-top-color: gray;
-  border-top-width: 1px; 
-}
-
-.resultData {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.queryBox {
-  text-align: center;
-}
-
-.queryBtns {
-  text-align: center;
-}
-
-.qb {
-  margin-left: 15px;
-  margin-top: 15px;
-}
-
-
-.region h4 {
-  margin-left: 20px;
-}
-
-.heart {
-  right: 20px;
-  position: absolute;
-  font-size: 30px;
-  cursor: pointer;
-  color: red;
-}
 
 /* PREFERENCES COMPONENT */
 .close {
