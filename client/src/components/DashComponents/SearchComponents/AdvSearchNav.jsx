@@ -1,11 +1,11 @@
 import React from 'react';
-var countries = require('../../../database-mysql/storedData').countries;
+// var countries = require('../../../database-mysql/storedData').countries;
 // import countries from '../../../database-mysql/storedData.js';
 
-const Preferences = (props) => {
+const SearchNav = (props) => {
   return (
-    <div>
-      {/* <h2>preferences</h2> */}
+    <div id="advSearchNav" > 
+      {/* <h2>preferences</h2>
       <div id="prefList">
         <div className="Types">
           <h3>Type:</h3>
@@ -13,7 +13,7 @@ const Preferences = (props) => {
           <a> Red<input onClick={props.changePref} type="checkbox" name="types" value="Red" /> </a>
           <a>White <input onClick={props.changePref} type="checkbox" name="types" value="White" /></a>
           <a>Rosé <input onClick={props.changePref} type="checkbox" name="types" value="Rose" /></a>
-          {/* <a>Champagne <input onClick={props.changePref} type="checkbox" name="types" value="Champagne" /></a> */}
+          <a>Champagne <input onClick={props.changePref} type="checkbox" name="types" value="Champagne" /></a>
         </div>
         <br />
         <div className="Notes">
@@ -45,9 +45,9 @@ const Preferences = (props) => {
         </div>
         <br />
           <input className="close" type="button" value="Close" onClick={props.close} />
-        </div>
+        </div> */}
     </div>
-      )
-    }
+  )
+}
     
-export default Preferences;
+export default SearchNav;

@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      curr: 'Profile',
+      curr: 'Search',
       tabs: ['Search', 'Favorites', 'Profile'],
       showAdv: false,
       user: '',
@@ -30,7 +30,6 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     // if user is accessing the url /dashboard directly but their cookie still exists, then this will add the username to the url
-    // console.log(sessionStorage)
     let stateObj = { username: sessionStorage.getItem('auth') }
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
@@ -59,17 +58,10 @@ class Dashboard extends React.Component {
   }
 
   changeTab(tabName) {
-    this.setState({ curr: tabName });
+    this.setState({ curr: tabName }); //() => history.pushState({ tab: `${tabName}`}, 'change tabs', `/dashboard/${this.state.user}/${tabName}`)
     this.setState({ showAdv: false });
   }
 
-  showAdvMenu() {
-    this.setState({ showAdv: true });
-  }
-
-  closeAdvMenu() {
-    this.setState({ showAdv: false });
-  }
 
   logout() {
     sessionStorage.removeItem('auth');
@@ -82,7 +74,7 @@ class Dashboard extends React.Component {
         <div id="nav">
           <div className="logoutDiv" >
             <Link to="/">
-              <Button onClick={this.logout} >Logout</Button>
+              <Button className="btns" onClick={this.logout} >Logout</Button>
             </Link>
           </div>
           <div id="dashboardTitle" >
