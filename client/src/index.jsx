@@ -15,16 +15,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      isLoggedIn: false,
       username: '',
       password: '',
       query: '',
-      wines: [],
-      additional: {
-        types: [],
-        notes: [],
-        regions: []
-      },
       previousQ: '', 
       getStarted: false
       // modalStatus: false  
@@ -52,25 +45,6 @@ class App extends React.Component {
       this.setState({ [userData.favs] : favs});
     })
   }
-
-  logout() {
-    this.setState({ isLoggedIn: false })
-  }
-
-  getQuery(e) {
-    if (e.target.name === 'query') {
-      this.setState({query: e.target.value});
-    } else {
-      // this is to add if not added to the object's array, or remove if already in the array. 
-      // mimics the checked and unchecked nature of the boxes.
-      if(!this.state.additional[e.target.name].includes(e.target.value)) {
-        this.state.additional[e.target.name].push(e.target.value);
-      } else {
-        this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
-      }
-    }
-  }
-
 
   // toggleBtns() {
   //   this.setState({ getStarted: !this.state.getStarted });
