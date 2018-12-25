@@ -13,10 +13,12 @@ router.post('/persist', db.persist);
 router.post('/logout', (req, res) => {
   req.session = null;
   res.end();
-})
+});
 
-router.post('/db/register', db.register)
+router.post('/db/register', db.register);
 
-router.get('/auth', auth.authenticate)
+router.get('/auth', auth.authenticate);
+
+router.post('/api/wines', api.search);
 
 module.exports = router;

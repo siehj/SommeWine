@@ -31,22 +31,22 @@ app.use('/', router);
 // app.post('/api/wines', (req, res) => {
 //   // console.log(req.body);
 //   // let query = req.url.split('=')[1];
-//   let request = [];
-//   if (req.body.query.length !== 0) {
-//     request.push(req.body.query)
-//   }
-//   // all = Object.values(req.body.additional);
-//   if(req.body.additional !== undefined) {
-//     if (req.body.additional.types) {
-//       request.push(req.body.additional.types[0]);
-//     }
-//     if (req.body.additional.regions) {
-//       request.push(req.body.additional.regions[0]);
-//     }
-//     if (req.body.additional.notes) {
-//       request.push(req.body.additional.notes[0]);
-//     }
-//   }
+  // let request = [];
+  // if (req.body.query.length !== 0) {
+  //   request.push(req.body.query)
+  // }
+  // // all = Object.values(req.body.additional);
+  // if(req.body.additional !== undefined) {
+  //   if (req.body.additional.types) {
+  //     request.push(req.body.additional.types[0]);
+  //   }
+  //   if (req.body.additional.regions) {
+  //     request.push(req.body.additional.regions[0]);
+  //   }
+  //   if (req.body.additional.notes) {
+  //     request.push(req.body.additional.notes[0]);
+  //   }
+  // }
 //   // let response = [];
 //   // wineApi.wineApi({query: request.join(' ')})
 //   //   .then(result => {
