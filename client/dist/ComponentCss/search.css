@@ -17,8 +17,6 @@
 }
 
 /* #advSearchNav {
-  flex-direction: column;
-  height: 100%;
 }  */
 
 .input-group-text {
@@ -26,7 +24,6 @@
 }
 
 .result { 
-  flex-direction: column;
   height: 100%;
   width: 100%;
   margin-left: 8%;
@@ -38,6 +35,17 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
   width: 95%;
+}
+
+.pgChange {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pgChange a {
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
 }
 
 /* 

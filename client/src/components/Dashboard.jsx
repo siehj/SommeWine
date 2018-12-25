@@ -90,8 +90,8 @@ class Dashboard extends React.Component {
         </div>
       <div id="main" >
         <Routes component={this.state.curr} /> 
-        <div id="bottom" ></div>
       </div>
+      {/* <div id="bottom" ></div> */}
     </div>
     )
   }

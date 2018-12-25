@@ -11,30 +11,64 @@ class Search extends React.Component {
     this.state = {
       query: '',
       wines: [],
-      advancedSearch: false,
+      advancedSearch: true,
+      start: 0,
+      end: 10,
+      wines: [],
+      additional: {
+        types: [],
+        notes: [],
+        regions: []
+      },
     };
 
+    this.getQuery = this.getQuery.bind(this);
+    this.nextPage = this.nextPage.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
+    this.previousPage = this.previousPage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
   }
   // componentDidMount() { console.log(wines) }
 
   toggleAdvMenu() {
-    this.setState({ showAdv: !this.state.advancedSearch });
+    this.setState({ advancedSearch: !this.state.advancedSearch });
   }
 
   updateQuery(e) {
     this.setState({ query : e.target.value });
   }
 
+  getQuery(e) {
+    if (e.target.name === 'query') {
+      this.setState({query: e.target.value});
+    } else {
+      // this is to add if not added to the object's array, or remove if already in the array. 
+      // mimics the checked and unchecked nature of the boxes.
+      if(!this.state.additional[e.target.name].includes(e.target.value)) {
+        this.state.additional[e.target.name].push(e.target.value);
+      } else {
+        this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
+      }
+    }
+  }
+
   handleSearch() {
     let option = { query: this.state.query, additional: this.state.additional}
-    $.post('/api/wines', option, (list) => {
-      this.setState({ wines: list });
-      // this.setState({ previousQ: this.state.query });
-      this.setState({ query: '' });
-    })
+    axios.post('/api/wines', option)
+      .then(({ data }) => {
+        this.setState({ wines: data }, () => console.log(this.state.wines));
+        // this.setState({ previousQ: this.state.query });
+        this.setState({ query: '' });
+      })
+  }
+
+  nextPage() {
+    if(this.state.end <= this.state.wines.length) this.setState({ end: this.state.end + 10, start: this.state.start + 10 });
+  }
+
+  previousPage() {
+    if(this.state.start >= 0) this.setState({ end: this.state.end - 10, start: this.state.start - 10 });
   }
 
   render() {
@@ -45,13 +79,13 @@ class Search extends React.Component {
             <InputGroupAddon addonType="prepend">Advanced</InputGroupAddon>
             <Input name="query" value={this.state.query} onChange={this.updateQuery} /> 
             <InputGroupAddon addonType="append">
-              <Button outline >Search</Button>
+              <Button outline onClick={this.handleSearch} >Search</Button>
             </InputGroupAddon>
           </InputGroup>
           <div className="searchMain">
-            { this.state.showAdv ? <SearchNav /> : null }
-            <div className="result">
-              {wines.slice(0, 10).map((wine, i) => {
+            {/* { this.state.advancedSearch ? <SearchNav /> : null } */}
+              <div className="result">
+              {this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => {
                 return (
                 <div className="resultData" key={i} >
                   <em>{wine.name}</em>  <a>Price: ${wine.price}</a>
@@ -64,6 +98,17 @@ class Search extends React.Component {
                 </div>
               )
             })}
+            {
+              this.state.wines.length ? 
+              <div className="pgChange text-center" >
+                {
+                  this.state.start === 0 ? <a onClick={this.nextPage} >Next Page</a> : 
+                  this.state.end >= this.state.wines.length ? <a onClick={this.previousPage} >Previous Page</a> :
+                  <div><a onClick={this.previousPage} > Previous Page </a> | <a onClick={this.nextPage} > Next Page </a></div>
+                }
+              </div>
+              : null
+            }
           </div>
         </div>
       </div>
