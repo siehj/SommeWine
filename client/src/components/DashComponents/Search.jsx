@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../../dist/ComponentCss/search.css';
 import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
 import SearchNav from './SearchComponents/AdvSearchNav.jsx';
-var wines = require('../../../../database-pg/storedData').wines;
+// var wines = require('../../../../database-pg/storedData').wines;
 
 class Search extends React.Component {
   constructor(props) {
@@ -29,9 +29,9 @@ class Search extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
   }
-  // componentDidMount() { console.log(wines) }
 
   toggleAdvMenu() {
+    console.log(this.state.advancedSearch,' => ', !this.state.advancedSearch);
     this.setState({ advancedSearch: !this.state.advancedSearch });
   }
 
@@ -76,15 +76,15 @@ class Search extends React.Component {
       <div>
         <h2 className="tabTitle">Search</h2>
           <InputGroup className="queryBox" >
-            <InputGroupAddon addonType="prepend">Advanced</InputGroupAddon>
+            <InputGroupAddon addonType="prepend" onClick={this.toggleAdvMenu} >Advanced</InputGroupAddon>
             <Input name="query" value={this.state.query} onChange={this.updateQuery} /> 
             <InputGroupAddon addonType="append">
               <Button outline onClick={this.handleSearch} >Search</Button>
             </InputGroupAddon>
           </InputGroup>
+          { this.state.advancedSearch ? <SearchNav /> : null }
           <div className="searchMain">
-            {/* { this.state.advancedSearch ? <SearchNav /> : null } */}
-              <div className="result">
+            <div className="result">
               {this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => {
                 return (
                 <div className="resultData" key={i} >
