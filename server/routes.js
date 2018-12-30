@@ -8,16 +8,16 @@ router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => err ? res.redirect('/'): null)
 });
 
-router.post('/persist', db.persist);
-
 router.post('/logout', (req, res) => {
   req.session = null;
   res.end();
 });
 
-router.post('/db/register', db.register);
-
 router.get('/auth', auth.authenticate);
+
+router.post('/persist', db.persist);
+
+router.post('/db/register', db.register);
 
 router.post('/api/wines', api.search);
 

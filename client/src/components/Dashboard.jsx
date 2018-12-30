@@ -2,7 +2,7 @@ import React from 'react';
 import '../../dist/ComponentCss/dashboard.css';
 import Routes from './DashComponents/ComponentRoutes.jsx';
 import Search from './DashComponents/Search.jsx';
-import Favorites from './DashComponents/Favorites.jsx';
+import Cellar from './DashComponents/Cellar.jsx';
 import Profile from './DashComponents/Profile.jsx';
 import { Route, Redirect, Link, Switch } from 'react-router-dom';
 import $ from 'jquery';
@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     super(props)
     this.state = {
       curr: 'Search',
-      tabs: ['Search', 'Favorites', 'Profile'],
+      tabs: ['Search', 'Cellar', 'Profile'],
       showAdv: false,
       user: '',
       userData: {
