@@ -1,0 +1,28 @@
+
+.cellarLeft {
+  flex-direction: column;
+  float: left;
+  width: 50%;
+  height: 95%;
+  border-right: 2px;
+  border-right-style: solid;
+  border-right-color: darkred;
+  color: darkred;
+};
+
+.clText {
+  margin-top: 50%;
+}
+
+.cellarRight {
+  flex-direction: column;
+  float: right;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  color: darkred;
+};
+
+
+
+
