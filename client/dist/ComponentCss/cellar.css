@@ -1,28 +1,68 @@
-
 .cellarLeft {
   flex-direction: column;
   float: left;
   width: 50%;
-  height: 95%;
+  height: 90%;
   border-right: 2px;
   border-right-style: solid;
   border-right-color: darkred;
   color: darkred;
+  margin-left: 32px; 
+  margin-top: 30px;
+  cursor: pointer;
 };
 
-.clText {
+.cltext {
   margin-top: 50%;
+}
+.cellarLeft:hover {
+  background-color: darkred;
+  color: white;
 }
 
 .cellarRight {
   flex-direction: column;
   float: right;
   width: 50%;
-  height: 100%;
+  height: 90%;
   text-align: center;
   color: darkred;
+  margin-top: 30px;
 };
 
+.here {
+  height: 50%;
+}
 
+.rightTop {
+  height: 50%;
+  width: 90%; 
+  margin-left: 32px; 
+  border-bottom: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: darkred;
+  cursor: pointer;
+}
 
+.rtText {
+  padding-top: 20%;
+}
 
+.rightTop:hover {
+  background-color: darkred;
+  color: white;
+}
+.rightBottom:hover {
+  background-color: darkred;
+  color: white;
+}
+.rightBottom {
+  height: 50%;
+  width: 90%; 
+  margin-left: 32px; 
+  cursor: pointer;
+}
+
+.rbText {
+  padding-top: 20%;
+}
