@@ -87,7 +87,16 @@ module.exports = {
           })
         : res.send(result)
       }) 
-  }
+  },
+
+  getUserData : (req, res) => {
+    let user = req.session.user.username;
+
+    db.getUserData(user)
+      .then(userInfo => res.send(userInfo[0]))
+      .catch(err => console.log(err));
+    // res.end("hola")
+  },
 
 
 

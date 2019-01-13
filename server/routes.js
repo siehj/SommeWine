@@ -21,4 +21,6 @@ router.post('/db/register', db.register);
 
 router.post('/api/wines', api.search);
 
+router.post('/db/profile', db.getUserData);
+
 module.exports = router;
