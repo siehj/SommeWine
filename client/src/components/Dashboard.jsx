@@ -57,11 +57,9 @@ class Dashboard extends React.Component {
           </div>
           <h3 className="welcome" >Welcome back <em>{this.state.user}</em>,</h3>
           <div className="tabs">
-            {
-              this.state.tabs.map((tab) => {
-                return <a className="tabBtn" value={tab} key={tab} onClick={() => this.changeTab(tab)} >{tab}</a>
-              })
-            }
+          {
+            this.state.tabs.map(tab => <a className="tabBtn" value={tab} key={tab} onClick={() => this.changeTab(tab)} >{tab}</a>)
+          }
           </div>
         </div>
       <div id="main" >
