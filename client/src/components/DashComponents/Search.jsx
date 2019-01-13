@@ -97,7 +97,7 @@ class Search extends React.Component {
           <div className="searchMain">
             <div className="result">
               {
-                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} />)
+                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} favorite={this.FavoriteWine} taste={this.TasteLaterList} />)
               }
             {
               this.state.wines.length ? 
