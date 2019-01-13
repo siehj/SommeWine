@@ -48,7 +48,7 @@ const findUser = (username) => {
   })
 };
 
-getUserInfo = (username, callback) => {
+const getUserInfo = (username, callback) => {
   const query = 'SELECT * FROM users WHERE username=$1;';
   const params = [username];
   client.query(query, params, (err, { rows }) => {
@@ -56,7 +56,16 @@ getUserInfo = (username, callback) => {
     else callback(null, rows);
     // console.log(rows);
   });
-}
+};
+
+const getUserData = (username) => {
+  const query = 'SELECT username, name, email FROM users WHERE username=$1;';
+  const params = [username];
+  return new Promise ((resolve, reject) => {
+    client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows));
+  });
+};
+
 // let getUserFavorites = (userId, callback) => {
 //   let query = `SELECT * FROM user_wines WHERE user_id=${userId};`;
 //   connection.query(query, (err, results) => {
@@ -81,5 +90,5 @@ getUserInfo = (username, callback) => {
 // }
 
 
-module.exports = { addUser, checkUsername, findUser, getUserInfo };
+module.exports = { addUser, checkUsername, findUser, getUserInfo, getUserData };
 
