@@ -16,8 +16,8 @@
   margin-top: 50%;
 }
 .cellarLeft:hover {
-  background-color: darkred;
-  color: white;
+  /* background-color: rgba(139, 0, 0, 0.904); */
+  /* color: white; */
 }
 
 .cellarRight {

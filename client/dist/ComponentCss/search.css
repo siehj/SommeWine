@@ -50,6 +50,30 @@
   cursor: pointer;
 }
 
+.resultData:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+#heart {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#heart:hover {
+  color: darkred;
+  font-weight: bold;
+}
+
+#list {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#list:hover {
+  font-weight: bold;
+  color: darkred;
+}
+
 /* 
 .result em {
   font-size: 20px;
@@ -83,13 +107,8 @@
 .region h4 {
   margin-left: 20px;
 }
+ 
+*/
 
-.heart {
-  right: 20px;
-  position: absolute;
-  font-size: 30px;
-  cursor: pointer;
-  color: red;
-} */
 
 

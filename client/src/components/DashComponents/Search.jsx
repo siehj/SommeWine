@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../../dist/ComponentCss/search.css';
 import { InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
 import SearchNav from './SearchComponents/AdvSearchNav.jsx';
+import SearchResults from './SearchComponents/SearchResult.jsx';
 // var wines = require('../../../../database-pg/storedData').wines;
 
 class Search extends React.Component {
@@ -28,6 +29,8 @@ class Search extends React.Component {
     this.previousPage = this.previousPage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
+    this.FavoriteWine = this.FavoriteWine.bind(this);
+    this.TasteLaterList = this.TasteLaterList.bind(this);
   }
 
   toggleAdvMenu() {
@@ -71,6 +74,14 @@ class Search extends React.Component {
     if(this.state.start >= 0) this.setState({ end: this.state.end - 10, start: this.state.start - 10 });
   }
 
+  FavoriteWine(wine) {
+    console.log(wine)
+  }
+
+  TasteLaterList(wine) {
+    console.log(wine)
+  }
+
   render() {
     return (
       <div>
@@ -82,22 +93,12 @@ class Search extends React.Component {
               <Button outline onClick={this.handleSearch} >Search</Button>
             </InputGroupAddon>
           </InputGroup>
-          { this.state.advancedSearch ? <SearchNav /> : null }
+        { this.state.advancedSearch ? <SearchNav /> : null }
           <div className="searchMain">
             <div className="result">
-              {this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => {
-                return (
-                <div className="resultData" key={i} >
-                  <em>{wine.name}</em>  <a>Price: ${wine.price}</a>
-                  {/* <a className="heart" name={JSON.stringify(wine)} value="false" >&#9825;</a> */}
-                  <br />
-                  <a>Region: {wine.region} </a>
-                  <br />
-                  <a>Type: {wine.type}</a>
-                  <br />
-                </div>
-              )
-            })}
+              {
+                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} />)
+              }
             {
               this.state.wines.length ? 
               <div className="pgChange text-center" >
