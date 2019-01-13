@@ -16,7 +16,7 @@ CREATE TABLE "wines" (
   "image" text,
   "rating" INTEGER  
   PRIMARY KEY ("id")
-)
+);
 
 CREATE TABLE "users" (
   "id" SERIAL,
@@ -42,9 +42,10 @@ CREATE TABLE user_preferences (
 )
 
 CREATE TABLE preferences (
-  id int AUTOINCREMENT, 
-  note text
-)
+  "id" serial, 
+  "note" text,
+  PRIMARY KEY ("id")
+);
 
 INSERT INTO preferences (note) VALUES ('Red');
 INSERT INTO preferences (note) VALUES ('White');
