@@ -14,7 +14,7 @@ CREATE TABLE "wines" (
   "type" text,
   "link" text,
   "image" text,
-  "rating" INTEGER  
+  "rating" INTEGER,  
   PRIMARY KEY ("id")
 );
 
@@ -29,19 +29,23 @@ CREATE TABLE "users" (
   -- "firstTime" boolean,
 
 -- essencially a user's favorite wines 
-CREATE TABLE user_wines (
-  user_id int,
-  wine_id int,
-  notes text, 
-  photo text
-)
+CREATE TABLE "user_wines" (
+  "id" SERIAL,
+  "user_id" INTEGER REFERENCES users ("id"),
+  "wine_id" INTEGER REFERENCES wines ("id"),
+  "notes" text, 
+  "photo" text,
+  PRIMARY KEY ("id")
+);
 
-CREATE TABLE user_preferences (
-  user_id int, 
-  preference_id int
-)
+CREATE TABLE "user_preferences" (
+  "id" SERIAL,
+  "user_id" INTEGER REFERENCES users ("id"), 
+  "preference_id" INTEGER REFERENCES "preferences" ("id"),
+  PRIMARY KEY ("id")
+);
 
-CREATE TABLE preferences (
+CREATE TABLE "preferences" (
   "id" serial, 
   "note" text,
   PRIMARY KEY ("id")
