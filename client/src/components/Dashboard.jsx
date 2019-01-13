@@ -1,20 +1,16 @@
 import React from 'react';
-import '../../dist/ComponentCss/dashboard.css';
-import Routes from './DashComponents/ComponentRoutes.jsx';
-import Search from './DashComponents/Search.jsx';
-import Cellar from './DashComponents/Cellar.jsx';
-import Profile from './DashComponents/Profile.jsx';
 import { Route, Redirect, Link, Switch } from 'react-router-dom';
-import $ from 'jquery';
-import axios from 'axios';
 import { Button, Container, Row, Col } from 'reactstrap';
+import '../../dist/ComponentCss/dashboard.css';
+import axios from 'axios';
+import Routes from './DashComponents/ComponentRoutes.jsx';
 
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      curr: 'Cellar',
+      curr: 'Profile',
       tabs: ['Search', 'Cellar', 'Profile'],
       showAdv: false,
       user: '',
@@ -33,27 +29,6 @@ class Dashboard extends React.Component {
     let stateObj = { username: sessionStorage.getItem('auth') }
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
-
-    // $.get('/db/userData', {username: this.props.username}, (data) => {
-    //   console.log(data);
-    // })
-  }
-
-  addFavorite(e) {
-    $.ajax({
-      url: "/db/favs",
-      method: "POST",
-      data: JSON.parse(e.target.name),
-      success: () => {
-        // alert(`${e.target.name} has been saved`);
-      }, 
-      error: () => {
-
-      }
-    })
-  } 
-
-  showData() {
 
   }
 
@@ -81,17 +56,17 @@ class Dashboard extends React.Component {
             <em >SommeWine</em>
           </div>
           <h3 className="welcome" >Welcome back <em>{this.state.user}</em>,</h3>
-            <div className="tabs">
-              {this.state.tabs.map((tab) => {
-                  return <a className="tabBtn" value={tab} key={tab} onClick={() => this.changeTab(tab)} >{tab}</a>
-                })
-              }
-            </div>
+          <div className="tabs">
+            {
+              this.state.tabs.map((tab) => {
+                return <a className="tabBtn" value={tab} key={tab} onClick={() => this.changeTab(tab)} >{tab}</a>
+              })
+            }
+          </div>
         </div>
       <div id="main" >
         <Routes component={this.state.curr} /> 
       </div>
-      {/* <div id="bottom" ></div> */}
     </div>
     )
   }
