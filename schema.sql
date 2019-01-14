@@ -48,50 +48,50 @@ CREATE TABLE "user_preferences" (
 CREATE TABLE "preferences" (
   "id" serial, 
   "note" text,
+  "category" text,
+  "region" text,
   PRIMARY KEY ("id")
 );
 
-INSERT INTO preferences (note) VALUES ('Red');
-INSERT INTO preferences (note) VALUES ('White');
-INSERT INTO preferences (note) VALUES ('Rose');
-INSERT INTO preferences (note) VALUES ('Sweet');
-INSERT INTO preferences (note) VALUES ('Dry');
-INSERT INTO preferences (note) VALUES ('Floral');
-INSERT INTO preferences (note) VALUES ('Fruity');
-INSERT INTO preferences (note) VALUES ('Spicy');
-INSERT INTO preferences (note) VALUES ('Nuts/Vanilla');
-INSERT INTO preferences (note) VALUES ('Woody');
-INSERT INTO preferences (note) VALUES ('France');
-INSERT INTO preferences (note) VALUES ('United States');
-INSERT INTO preferences (note) VALUES ('Argentina');
-INSERT INTO preferences (note) VALUES ('Canada');
-INSERT INTO preferences (note) VALUES ('El Salvador');
-INSERT INTO preferences (note) VALUES ('Puerto Rico');
-INSERT INTO preferences (note) VALUES ('Austria');
-INSERT INTO preferences (note) VALUES ('Belgium');
-INSERT INTO preferences (note) VALUES ('Denmark');
-INSERT INTO preferences (note) VALUES ('Estonia');
-INSERT INTO preferences (note) VALUES ('France');
-INSERT INTO preferences (note) VALUES ('Germany');
-INSERT INTO preferences (note) VALUES ('Great Britain');
-INSERT INTO preferences (note) VALUES ('Hungary');
-INSERT INTO preferences (note) VALUES ('Irelan');
-INSERT INTO preferences (note) VALUES ('Italy');
-INSERT INTO preferences (note) VALUES ('Malta');
-INSERT INTO preferences (note) VALUES ('Netherlands');
-INSERT INTO preferences (note) VALUES ('Spain');
-INSERT INTO preferences (note) VALUES ('Switzerland');
-INSERT INTO preferences (note) VALUES ('United Kingdom');
-INSERT INTO preferences (note) VALUES ('Norway');
-INSERT INTO preferences (note) VALUES ('Poland');
-INSERT INTO preferences (note) VALUES ('Portugal');
-INSERT INTO preferences (note) VALUES ('Russia');
-INSERT INTO preferences (note) VALUES ('Hong Kong');
-INSERT INTO preferences (note) VALUES ('Japan');
-INSERT INTO preferences (note) VALUES ('Malaysia');
-INSERT INTO preferences (note) VALUES ('Singapore');
-INSERT INTO preferences (note) VALUES ('Austalia');
-INSERT INTO preferences (note) VALUES ('New Zealand');
+INSERT INTO preferences (note, category) VALUES ('Red', 'type');
+INSERT INTO preferences (note, category) VALUES ('White', 'type');
+INSERT INTO preferences (note, category) VALUES ('Rose', 'type');
+INSERT INTO preferences (note, category) VALUES ('Sweet', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Dry', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Floral', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Fruity', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Spicy', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Nuts/Vanilla', 'flavor');
+INSERT INTO preferences (note, category) VALUES ('Woody', 'flavor');
+INSERT INTO preferences (note, category, region) VALUES ('United States', 'Country', 'North America');
+INSERT INTO preferences (note, category, region) VALUES ('Canada', 'Country', 'North America');
+INSERT INTO preferences (note, category, region) VALUES ('Argentina', 'Country', 'South America');
+INSERT INTO preferences (note, category, region) VALUES ('El Salvador', 'Country', 'South America');
+INSERT INTO preferences (note, category, region) VALUES ('Puerto Rico', 'Country', 'South America');
+INSERT INTO preferences (note, category, region) VALUES ('France', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Austria', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Belgium', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Denmark', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Estonia', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Germany', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Hungary', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Ireland', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Italy', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Malta', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Netherlands', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Spain', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Switzerland', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('United Kingdom', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Norway', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Poland', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Portugal', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Russia', 'Country', 'Europe');
+INSERT INTO preferences (note, category, region) VALUES ('Hong Kong', 'Country', 'Asia');
+INSERT INTO preferences (note, category, region) VALUES ('Japan', 'Country', 'Asia');
+INSERT INTO preferences (note, category, region) VALUES ('Malaysia', 'Country', 'Asia');
+INSERT INTO preferences (note, category, region) VALUES ('Singapore', 'Country', 'Asia');
+INSERT INTO preferences (note, category, region) VALUES ('Austalia', 'Country', 'Oceania');
+INSERT INTO preferences (note, category, region) VALUES ('New Zealand', 'Country', 'Oceania');
 
 
 
