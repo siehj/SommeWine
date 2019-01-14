@@ -12,17 +12,19 @@ class Profile extends React.Component {
       userPreferences : [],
       allPreferences: []
     };
+    this.getPreferences = this.getPreferences.bind(this);
   }
 
   componentDidMount() {
     console.log('getting..')
     axios.post('/db/profile')
-      .then(({ data }) => this.setState({ userData : data }));
+      .then(({ data }) => this.setState({ userData : data }))
+      .then(() => this.getPreferences());
   }
 
   getPreferences() {
     axios.post('/db/profilePreferences')
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => this.setState({ allPreferences : data }))
   }
 
   render() {

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const auth = require('../service/auth.js');
-const db = require('./routes/db.js');
-const api = require('./routes/api');
+const db = require('./routes/dbRoutes.js');
+const api = require('./routes/apiRoutes');
 const path = require('path');
 
 router.get('/*', (req, res) => {
@@ -22,5 +22,7 @@ router.post('/db/register', db.register);
 router.post('/api/wines', api.search);
 
 router.post('/db/profile', db.getUserData);
+
+router.post('/db/profilePreferences', db.getProfilePreferences);
 
 module.exports = router;
