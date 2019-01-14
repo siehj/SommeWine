@@ -3,6 +3,8 @@ import axios from 'axios';
 import './../../../dist/ComponentCss/profile.css';
 import { Col } from 'reactstrap';
 import UserProfile from './ProfileComponents/UserProfileData.jsx';
+import userPreferences from './ProfileComponents/UserPreferences.jsx';
+import UserPreferences from './ProfileComponents/UserPreferences.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class Profile extends React.Component {
           }
         </div>
         <div className="userPreferences" >
-          Preferences
+          <UserPreferences prefs={this.state.allPreferences} edit={this.state.editPreferences} />
         </div>
       </Col>
     )
