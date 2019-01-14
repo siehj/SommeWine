@@ -1,0 +1,15 @@
+
+
+#Profile label {
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 25%;
+}
+
+em {
+  font-size: 15px;
+}
+
+.pleaseUpdate {
+  color: darkred;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import './../../../dist/ComponentCss/profile.css';
 import { Col } from 'reactstrap';
+import UserProfile from './ProfileComponents/UserProfileData.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -16,7 +18,6 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    console.log('getting..')
     axios.post('/db/profile')
       .then(({ data }) => this.setState({ userData : data }))
       .then(() => this.getPreferences());
@@ -29,12 +30,14 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <Col>
+      <Col id="Profile" >
         <div>
           <h2 className="tabTitle">Profile</h2>
         </div>
         <div className="userData" >
-          User Data
+          { Object.keys(this.state.userData).length ?
+           <UserProfile user={this.state.userData} edit={this.state.editUser} /> : null
+          }
         </div>
         <div className="userPreferences" >
           Preferences
