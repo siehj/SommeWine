@@ -66,6 +66,17 @@ const getUserData = (username) => {
   });
 };
 
+const getAllPreferences = () => {
+  const query = 'SELECT * FROM preferences;';
+  return new Promise ((resolve, reject) => client.query(query, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const getUserPreferences = (username) => {
+  const query = 'SELECT * FROM user_preference WHERE username=$1;';
+  const params = [username];
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
 // let getUserFavorites = (userId, callback) => {
 //   let query = `SELECT * FROM user_wines WHERE user_id=${userId};`;
 //   connection.query(query, (err, results) => {
@@ -90,5 +101,5 @@ const getUserData = (username) => {
 // }
 
 
-module.exports = { addUser, checkUsername, findUser, getUserInfo, getUserData };
+module.exports = { addUser, checkUsername, findUser, getUserInfo, getUserData, getAllPreferences };
 
