@@ -25,4 +25,6 @@ router.post('/db/profile', db.getUserData);
 
 router.post('/db/profilePreferences', db.getProfilePreferences);
 
+router.post('/db/editPreferences', db.updatePreferences);
+
 module.exports = router;

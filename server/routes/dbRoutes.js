@@ -104,6 +104,12 @@ module.exports = {
       .then(prefs => helper.shapePreferences(prefs))
       .then(result => res.send(result))
       .catch(err => console.log(err));
+  },
+
+  updatePreferences : (req, res) => {
+    console.log(req.body)
+
+    res.end();
   }
 
 
