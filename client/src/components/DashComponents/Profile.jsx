@@ -59,9 +59,10 @@ class Profile extends React.Component {
   }
 
   save(e) {
+    this.toggle(e.target.title)
     if (e.target.title === 'editPreferences') {
       axios.post('/db/editPreferences', { newPreferences: this.state.updatedPrefs })
-        .then((response) => console.log(response))
+        .then(() => console.log('sent'))
     } else {
       console.log(e.target.title);
       console.log(this.state); 
