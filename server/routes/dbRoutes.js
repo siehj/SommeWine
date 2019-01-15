@@ -107,9 +107,37 @@ module.exports = {
   },
 
   updatePreferences : (req, res) => {
-    console.log(req.body)
-
+    //promise entire array
+    let username = req.session.user.username;
+      req.body.newPreferences.map(obj => {
+        new Promise ((resolve, reject) => {
+          //check each item to see if they exist in the table
+          db.checkPreferenceExists(username, obj)
+            .then(result => {
+              if(result[0].exists) {
+                // console.log('exists, now we need to remove')
+                db.deleteUserPreference(username, obj)
+                  .then(() => console.log("removed", obj))
+                  .catch(err => console.log)
+              } else {
+                // console.log('doesnt exist, now we need to add')
+                db.addUserPreference(username, obj)
+                  .then(() => console.log("added", obj))
+                  .catch(err => console.log)
+              }
+            })
+            .catch(err => console.log)
+          })
+      })
     res.end();
+  },
+
+  getUserPreferences : (req, res) => {
+    let username = req.session.user.username;
+    console.log(username);
+
+    // db query to get the 
+
   }
 
 
