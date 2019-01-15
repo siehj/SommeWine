@@ -3,7 +3,6 @@ import axios from 'axios';
 import './../../../dist/ComponentCss/profile.css';
 import { Col } from 'reactstrap';
 import UserProfile from './ProfileComponents/UserProfileData.jsx';
-import userPreferences from './ProfileComponents/UserPreferences.jsx';
 import UserPreferences from './ProfileComponents/UserPreferences.jsx';
 
 class Profile extends React.Component {
@@ -13,10 +12,18 @@ class Profile extends React.Component {
       editUser: false,
       editPreferences: false,
       userData: {},
-      userPreferences : [],
-      allPreferences: []
+      userPreferences : {},
+      allPreferences: {},
+      updatedPrefs: [],
+      updatedUserInfo: {}
     };
+
+    this.save = this.save.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.getPreferences = this.getPreferences.bind(this);
+    this.getUserProfile = this.getUserProfile.bind(this);
+    this.updateUserProfile = this.updateUserProfile.bind(this);
+    this.updatePreferences = this.updatePreferences.bind(this);
   }
 
   componentDidMount() {
@@ -24,10 +31,42 @@ class Profile extends React.Component {
       .then(({ data }) => this.setState({ userData : data }))
       .then(() => this.getPreferences());
   }
+  getUserProfile() {
+    axios.post('/db/profile')
+      .then(({ data }) => this.setState({ userData : data }))
+  }
 
   getPreferences() {
     axios.post('/db/profilePreferences')
       .then(({ data }) => this.setState({ allPreferences : data }))
+  }
+
+  updatePreferences(e) {
+    let update = this.state.updatedPrefs;
+    update.includes(e.target.title) ? 
+      update.splice(update.indexOf(e.target.title), 1) : update.push(e.target.title);
+
+    this.setState({ updatedPrefs : update });
+  }
+
+  updateUserProfile(userData) {
+    console.log(userData);
+  }
+
+  toggle(area) {
+    console.log(this.state[area]);
+    this.setState({ [area] : !this.state[area] });
+  }
+
+  save(e) {
+    if (e.target.title === 'editPreferences') {
+      axios.post('/db/editPreferences', { newPreferences: this.state.updatedPrefs })
+        .then((response) => console.log(response))
+    } else {
+      console.log(e.target.title);
+      console.log(this.state); 
+
+    }
   }
 
   render() {
@@ -38,11 +77,18 @@ class Profile extends React.Component {
         </div>
         <div className="userData" >
           { Object.keys(this.state.userData).length ?
-           <UserProfile user={this.state.userData} edit={this.state.editUser} /> : null
+           <UserProfile user={this.state.userData} edit={this.state.editUser} update={this.updateProfile} toggle={this.toggle} save={this.save} /> : null
           }
         </div>
         <div className="userPreferences" >
-          <UserPreferences prefs={this.state.allPreferences} edit={this.state.editPreferences} />
+          <UserPreferences 
+            userPrefs={this.state.userPreferences}
+            prefs={this.state.allPreferences} 
+            edit={this.state.editPreferences} 
+            update={this.updatePreferences} 
+            toggle={this.toggle} 
+            save={this.save}
+          />
         </div>
       </Col>
     )

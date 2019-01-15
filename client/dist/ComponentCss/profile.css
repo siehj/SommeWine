@@ -7,7 +7,7 @@
 }
 
 #Profile em {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .pleaseUpdate {
@@ -17,6 +17,10 @@
 .userData {
   margin-top: 2%;
   padding-top: 1%;
+}
+
+.userData input {
+  margin: 0px
 }
 
 .userPreferences {
@@ -53,3 +57,6 @@
   cursor: pointer;
 }
 
+.userProfileBtns {
+  width: 100%;
+}
