@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Card, Button, CardTitle, CardText, Row, Col, Input } from 'reactstrap';
 
 const UserProfile = (props) => {
  return (
@@ -10,18 +10,43 @@ const UserProfile = (props) => {
         Object.keys(props.user).map(item => {
           return (
             <Col key={item}>
-              <CardText>
-                <label>{item}:</label>
-                { 
-                  props.user[item] === null ? <em className="pleaseUpdate">Please Update</em> : <em>{props.user[item]}</em>
-                 }
-              </CardText>
+              {
+                props.edit ? 
+                  <CardText>
+                    { 
+                      item === "username" ? 
+                      <div>
+                        <label>{item}:</label>
+                        <em>{props.user[item]}</em>
+                      </div>
+                      : <Input placeholder={item} onChange={props.update} />
+                    }
+                  </CardText> 
+                : 
+                  <CardText>
+                    <label>{item}:</label>
+                    { 
+                      props.user[item] === null ? <em className="pleaseUpdate">Please Update</em> : <em>{props.user[item]}</em>
+                    }
+                  </CardText>
+              }
             </Col>
           )
         })
       }
     </Row>
-    <Button outline color="secondary" >Edit</Button>
+    {
+      props.edit ? 
+      <Row style={{ marginTop : "10px" }} >
+        <Col>
+          <Button outline color="secondary" className="userProfileBtns" title="editUser" onClick={props.save} >Save</Button> 
+        </Col>
+        <Col>
+          <Button outline color="secondary" className="userProfileBtns" onClick={() => props.toggle('editUser')}>Cancel</Button> 
+        </Col>
+      </Row>
+        : <Button onClick={() => props.toggle('editUser')} outline color="secondary" >Edit</Button>
+    }
   </Card>
  )
 };

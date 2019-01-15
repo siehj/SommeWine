@@ -1,8 +1,9 @@
 import React from 'react';
+import UserPreferenceCard from './UserPrefCard.jsx';
 import { Card, Button, ListGroup, ListGroupItem,CardTitle, UncontrolledCollapse, Row, Col } from 'reactstrap';
 
 const UserPreferences = (props) => {
-  return props.edit ? null :
+  return props.edit ? 
   (
     <Card className="userPreferences" >
       <CardTitle className="text-center" >Preferences:</CardTitle>
@@ -17,17 +18,17 @@ const UserPreferences = (props) => {
                 <ListGroupItem className="categoryTitle text-center" >{category.toUpperCase()}</ListGroupItem> }
                 
                 { category !== 'Country' ? 
-                  props.prefs[category].map(entry => <ListGroupItem className="prefItem" key={entry.id} >{entry.note}</ListGroupItem>) 
+                  props.prefs[category].map(entry => <ListGroupItem className="prefItem" title={entry.note} onClick={props.update} key={entry.id} >{entry.note}</ListGroupItem>) 
                   : 
                   Object.keys(props.prefs[category]).map(region => {
                     return (
                       <div key={region} >
-                        <ListGroupItem className="prefItem" id={region} >{ region }</ListGroupItem> 
+                        <ListGroupItem id={region} >{ region }</ListGroupItem> 
                         {
                           props.prefs[category][region].map(country => {
                             return (
                               <UncontrolledCollapse toggler="#regions" key={country.id} >
-                                <ListGroupItem className="countries" >{country.note}</ListGroupItem>
+                                <ListGroupItem className="countries prefItem" title={country.note} onClick={props.update} >{country.note}</ListGroupItem>
                               </UncontrolledCollapse>
                             )
                         })
@@ -42,8 +43,9 @@ const UserPreferences = (props) => {
           })
         }
       </Row>
+      <Button style={{ margin: '10px' }} outline title={'editPreferences'} onClick={props.save} >Save</Button>
     </Card>
-  )
+  ) : <UserPreferenceCard prefs={props.userPrefs} toggle={props.toggle} /> 
 }
 
 export default UserPreferences;
