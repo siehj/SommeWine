@@ -45,7 +45,7 @@ const UserPreferences = (props) => {
           })
         }
       </Row>
-      <Button style={{ margin: '10px' }} outline title={'editPreferences'} onClick={props.save} >Save</Button>
+      <Button style={{ margin: '10px' }} outline title={'editPreferences'} onClick={props.save} >Save/Cancel</Button>
     </Card>
   ) : <UserPreferenceCard prefs={props.userPrefs} toggle={props.toggle} /> 
 }

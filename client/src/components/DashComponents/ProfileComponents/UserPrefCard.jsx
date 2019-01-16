@@ -19,7 +19,7 @@ const UserPrefernceCard = (props) => {
           <h3 className="text-center" >No Preferences have been selected</h3>
         </div>
       }
-      <Button outline color="secondary" onClick={() => props.toggle('editPreferences')} >Add Preferences</Button>
+      <Button outline color="secondary" onClick={() => props.toggle('editPreferences')} >Add/Remove Preferences</Button>
     </Card>
   )
 }
