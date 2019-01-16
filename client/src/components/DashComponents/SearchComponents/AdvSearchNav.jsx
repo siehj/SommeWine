@@ -1,11 +1,49 @@
 import React from 'react';
-// var countries = require('../../../database-mysql/storedData').countries;
-// import countries from '../../../database-mysql/storedData.js';
+import { Card, Row, Col, CardText } from 'reactstrap';
 
 const SearchNav = (props) => {
   return (
-    <div id="advSearchNav" > 
-      {/* <h2>preferences</h2>
+    <Card id="advSearchNav" > 
+    { props.status ? null :
+      (
+        <Row className="text-center" >
+          {
+            Object.keys(props.prefs).map((col, i) => {
+              return (
+                <Col key={i}>
+                  <a className="colTitle" >{col === 'Country' ? "REGION" : col.toUpperCase()}</a>
+                  <br/>
+
+                  {
+                    col === 'Country' ? 
+                      Object.keys(props.prefs[col]).map((region, r) => {
+                        return (
+                          <Row key={r} >
+                            <a>{region}</a>
+                            {/* {
+                              props.prefs[col][region].map((country, c) => <a key={c}>{country.note}<input type="checkbox" value={country.note} /></a> )
+                            } */}
+                          </Row>
+                        )
+                      })
+                    :
+                      props.prefs[col].map((options, j) => <a key={j} >{ options.note }  <input onClick={props.query} type="checkbox" value={options.note} /> </a> )
+
+                  }
+                </Col>
+              )
+            })
+          }
+        </Row>
+      ) }
+    </Card>
+  )  
+}
+    
+export default SearchNav;
+
+
+     {/* <h2>preferences</h2>
       <div id="prefList">
         <div className="Types">
           <h3>Type:</h3>
@@ -46,8 +84,3 @@ const SearchNav = (props) => {
         <br />
           <input className="close" type="button" value="Close" onClick={props.close} />
         </div> */}
-    </div>
-  )
-}
-    
-export default SearchNav;
