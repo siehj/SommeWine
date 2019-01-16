@@ -30,7 +30,8 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserProfile()
+    axios.post('/db/profile')
+      .then(({ data }) => this.setState({ userData : data }))
       .then(() => this.getPreferences())
       .then(() => this.getUserPrefs())
   }
