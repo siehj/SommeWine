@@ -17,9 +17,16 @@
 }
 
 #advSearchNav {
-  height: 100%;
-  background-color: darkred;
-} 
+  height: 0px;
+  margin-left: 7.5%;
+  margin-right: 7.5%;
+  margin-top: 10px;
+  transition-duration: 200ms;
+}
+
+.colTitle {
+  color: darkred;
+}
 
 .input-group-text {
   cursor: pointer;
@@ -73,6 +80,7 @@
   font-weight: bold;
   color: darkred;
 }
+
 
 /* 
 .result em {
