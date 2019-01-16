@@ -85,22 +85,6 @@ const getPrefById = (id) => {
   })
 };
 
-// const getUserId = (username) => {
-//   const query = 'SELECT id FROM users WHERE username=$1;';
-//   const params = [username];
-//   return new Promise((resolve, reject) => {
-//     client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows));
-//   });
-// };
-
-// const getPreferenceId = (preference) => {
-//   const query = 'SELECT id FROM preferences WHERE note=$1;';
-//   const params = [preference];
-//   return new Promise((resolve, reject) => {
-//     client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows));
-//   });
-// };
-
 const addUserPreference = (username, preference) => {
   const query = 'INSERT INTO user_preferences (user_id, preference_id) VALUES ((SELECT id FROM users WHERE username=$1), (SELECT id FROM preferences WHERE note=$2));';
   const params = [username, preference];
@@ -123,6 +107,12 @@ const checkPreferenceExists = (username, preference) => {
   return new Promise ((resolve, reject) => {
     client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows))
   });
+};
+
+const updateUser = (name, email, username) => {
+  const query = 'UPDATE users SET name=$1, email=$2 WHERE username=$3;';
+  const params = [name, email, username];
+  return new Promise ((resolve, reject) => client.query(query, params, (err, rows) => err ? reject(err) : resolve(rows)));
 };
 // let getUserFavorites = (userId, callback) => {
 //   let query = `SELECT * FROM user_wines WHERE user_id=${userId};`;
@@ -152,5 +142,5 @@ module.exports = { addUser,
   checkUsername,
   checkPreferenceExists, 
   deleteUserPreference, getUserPreferences, getPrefById,
-  findUser, getUserInfo, getUserData, getAllPreferences, addUserPreference };
+  findUser, getUserInfo, getUserData, getAllPreferences, addUserPreference, updateUser };
 
