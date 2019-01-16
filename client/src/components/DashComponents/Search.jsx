@@ -31,7 +31,6 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.toggleAdvMenu()
     this.getAllPreferences();  
   }
     
@@ -41,9 +40,11 @@ class Search extends React.Component {
   }
 
   toggleAdvMenu() {
-    this.setState({ advancedSearch: !this.state.advancedSearch });
     let element = document.getElementById("advSearchNav");
-    this.state.advancedSearch ? element.style.height = "180px" : element.style.height = "0px";
+    this.setState({ advancedSearch: !this.state.advancedSearch }, () => {
+      this.state.advancedSearch === true ? element.style.height = "180px" : element.style.height = "0px";
+    });
+    
   }
 
   updateQuery(e) {
@@ -58,8 +59,9 @@ class Search extends React.Component {
   }
 
   handleSearch() {
+    this.setState({ advancedSearch : false })
     axios.post('/api/wines', { query: this.state.query })
-      .then(({ data }) => this.setState({ wines: data, query : '' }, () => this.toggleAdvMenu()))
+      .then(({ data }) => this.setState({ wines: data, query : '' }))
   }
 
   nextPage() {

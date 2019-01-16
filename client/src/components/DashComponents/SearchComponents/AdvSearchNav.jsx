@@ -4,7 +4,7 @@ import { Card, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, Dro
 const SearchNav = (props) => {
   return (
     <Card id="advSearchNav" > 
-    { props.status ? null :
+    { props.status ? 
       (
         <Row className="text-center" >
           {
@@ -41,7 +41,7 @@ const SearchNav = (props) => {
             })
           }
         </Row>
-      ) }
+      ) : null }
     </Card>
   )  
 }
