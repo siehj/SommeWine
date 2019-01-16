@@ -15,11 +15,11 @@ const UserProfile = (props) => {
                   <CardText>
                     { 
                       item === "username" ? 
-                      <div>
+                      <a>
                         <label>{item}:</label>
                         <em>{props.user[item]}</em>
-                      </div>
-                      : <Input placeholder={item} onChange={props.update} />
+                      </a>
+                      : <Input placeholder={item} title={item} onChange={props.update} />
                     }
                   </CardText> 
                 : 

@@ -12,6 +12,8 @@ class Profile extends React.Component {
       editUser: false,
       editPreferences: false,
       userData: {},
+      name: '',
+      email: '',
       userPreferences : [],
       allPreferences: {},
       updatedPrefs: [],
@@ -28,8 +30,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    axios.post('/db/profile')
-      .then(({ data }) => this.setState({ userData : data }))
+    this.getUserProfile()
       .then(() => this.getPreferences())
       .then(() => this.getUserPrefs())
   }
@@ -54,11 +55,11 @@ class Profile extends React.Component {
     update.includes(e.target.title) ? 
       update.splice(update.indexOf(e.target.title), 1) : update.push(e.target.title);
 
-    this.setState({ updatedPrefs : update })
+    this.setState({ updatedPrefs : update });
   }
 
-  updateUserProfile(userData) {
-    console.log(userData);
+  updateUserProfile(e) {
+    this.setState({ [e.target.title] : e.target.value });
   }
 
   toggle(area) {
@@ -70,11 +71,12 @@ class Profile extends React.Component {
     if (e.target.title === 'editPreferences') {
       axios.post('/db/editPreferences', { newPreferences: this.state.updatedPrefs })
         .then(() => this.getUserPrefs())
-        .then(() => this.setState({ updatedPrefs : [] }))
+        .then(() => this.setState({ updatedPrefs : [] }));
     } else {
-      console.log(e.target.title);
-      console.log(this.state); 
-
+      let name = this.state.name.length ? this.state.name : this.state.userData.username;
+      let email = this.state.email.length ? this.state.name : this.state.userData.email; 
+      axios.put('/db/updateUserProfile', { name: name, email: email })
+        .then(() => this.getUserProfile());
     }
   }
 
@@ -86,7 +88,7 @@ class Profile extends React.Component {
         </div>
         <div className="userData" >
           { Object.keys(this.state.userData).length ?
-           <UserProfile user={this.state.userData} edit={this.state.editUser} update={this.updateProfile} toggle={this.toggle} save={this.save} /> : null
+           <UserProfile user={this.state.userData} edit={this.state.editUser} update={this.updateUserProfile} toggle={this.toggle} save={this.save} /> : null
           }
         </div>
         <div className="userPreferences" >
