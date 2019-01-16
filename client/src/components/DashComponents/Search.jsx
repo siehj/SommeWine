@@ -16,11 +16,6 @@ class Search extends React.Component {
       start: 0,
       end: 10,
       wines: [],
-      additional: {
-        types: [],
-        notes: [],
-        regions: []
-      },
       allPreferences : {}
     };
 
@@ -46,10 +41,9 @@ class Search extends React.Component {
   }
 
   toggleAdvMenu() {
-    // console.log(this.state.advancedSearch,' => ', !this.state.advancedSearch);
     this.setState({ advancedSearch: !this.state.advancedSearch });
     let element = document.getElementById("advSearchNav");
-    this.state.advancedSearch ? element.style.height = "150px" : element.style.height = "0px";
+    this.state.advancedSearch ? element.style.height = "180px" : element.style.height = "0px";
   }
 
   updateQuery(e) {
@@ -57,17 +51,6 @@ class Search extends React.Component {
   }
 
   getQuery(e) {
-    // if (e.target.name === 'query') {
-    //   this.setState({query: e.target.value});
-    // } else {
-    //   // this is to add if not added to the object's array, or remove if already in the array. 
-    //   // mimics the checked and unchecked nature of the boxes.
-    //   if(!this.state.additional[e.target.name].includes(e.target.value)) {
-    //     this.state.additional[e.target.name].push(e.target.value);
-    //   } else {
-    //     this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
-    //   }
-    // }
     let query = this.state.query;
     query = query.includes(e.target.value) ? query.replace(e.target.value, '') : query + ' ' + e.target.value;
     this.setState({ query : query }) 
@@ -75,13 +58,8 @@ class Search extends React.Component {
   }
 
   handleSearch() {
-    let option = { query: this.state.query, additional: this.state.additional}
-    axios.post('/api/wines', option)
-      .then(({ data }) => {
-        this.setState({ wines: data }, () => console.log(this.state.wines));
-        // this.setState({ previousQ: this.state.query });
-        this.setState({ query: '' });
-      })
+    axios.post('/api/wines', { query: this.state.query })
+      .then(({ data }) => this.setState({ wines: data, query : '' }, () => this.toggleAdvMenu()))
   }
 
   nextPage() {

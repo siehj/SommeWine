@@ -81,6 +81,16 @@
   color: darkred;
 }
 
+.advCountries {
+  border-radius: 5px;
+  width: inherit;
+}
+
+.advRegions {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 
 /* 
 .result em {

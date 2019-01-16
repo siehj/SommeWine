@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, CardText } from 'reactstrap';
+import { Card, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const SearchNav = (props) => {
   return (
@@ -18,11 +18,17 @@ const SearchNav = (props) => {
                     col === 'Country' ? 
                       Object.keys(props.prefs[col]).map((region, r) => {
                         return (
-                          <Row key={r} >
-                            <a>{region}</a>
-                            {/* {
-                              props.prefs[col][region].map((country, c) => <a key={c}>{country.note}<input type="checkbox" value={country.note} /></a> )
-                            } */}
+                          <Row key={r} className="advRegions" >
+                            <Col>
+                              <a >{region}</a>
+                            </Col>
+                            <Col>
+                              <select name={region} className="advCountries" onMouseUp={props.query} onMouseDown={props.query} >
+                                {
+                                  props.prefs[col][region].map((country, c) => <option  value={country.note} key={c}>{country.note}</option> )
+                                } 
+                              </select>
+                            </Col>
                           </Row>
                         )
                       })
