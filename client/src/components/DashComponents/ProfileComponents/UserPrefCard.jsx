@@ -1,21 +1,19 @@
 import React from 'react';
-import { Card, Row, CardTitle, Button } from 'reactstrap';
+import { Card, Row, CardTitle, Button, Col } from 'reactstrap';
 
 const UserPrefernceCard = (props) => {
   return (
     <Card className="userPreferences">
       <CardTitle className="text-center" >Your Preferences:</CardTitle>
       {
-        Object.keys(props.prefs).length ? 
-        <ul>
+        props.prefs.length ? 
+        <Row>
           {
-            Object.keys(props.prefs).map(item => {
-              console.log(item)
-              return <li>item</li>
-              // return props.prefs[item].map(bullet => <li>{bu}</li> )
+            props.prefs.map((item, i) => {
+              return <Col key={i} ><ul><li>{item.note}</li></ul></Col>
             })
           }
-        </ul> 
+        </Row>
         : 
         <div>
           <h3 className="text-center" >No Preferences have been selected</h3>

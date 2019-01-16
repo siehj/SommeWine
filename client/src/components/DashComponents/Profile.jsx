@@ -12,7 +12,7 @@ class Profile extends React.Component {
       editUser: false,
       editPreferences: false,
       userData: {},
-      userPreferences : {},
+      userPreferences : [],
       allPreferences: {},
       updatedPrefs: [],
       updatedUserInfo: {}
@@ -20,6 +20,7 @@ class Profile extends React.Component {
 
     this.save = this.save.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.getUserPrefs = this.getUserPrefs.bind(this);
     this.getPreferences = this.getPreferences.bind(this);
     this.getUserProfile = this.getUserProfile.bind(this);
     this.updateUserProfile = this.updateUserProfile.bind(this);
@@ -29,8 +30,15 @@ class Profile extends React.Component {
   componentDidMount() {
     axios.post('/db/profile')
       .then(({ data }) => this.setState({ userData : data }))
-      .then(() => this.getPreferences());
+      .then(() => this.getPreferences())
+      .then(() => this.getUserPrefs())
   }
+
+  getUserPrefs () {
+    axios.post('/db/userPrefs')
+    .then(({ data }) => this.setState({ userPreferences : data }))
+  }
+
   getUserProfile() {
     axios.post('/db/profile')
       .then(({ data }) => this.setState({ userData : data }))
@@ -46,7 +54,7 @@ class Profile extends React.Component {
     update.includes(e.target.title) ? 
       update.splice(update.indexOf(e.target.title), 1) : update.push(e.target.title);
 
-    this.setState({ updatedPrefs : update });
+    this.setState({ updatedPrefs : update })
   }
 
   updateUserProfile(userData) {
@@ -54,15 +62,16 @@ class Profile extends React.Component {
   }
 
   toggle(area) {
-    console.log(this.state[area]);
     this.setState({ [area] : !this.state[area] });
   }
 
   save(e) {
+    console.log(this.state.updatedPrefs)
     this.toggle(e.target.title)
     if (e.target.title === 'editPreferences') {
       axios.post('/db/editPreferences', { newPreferences: this.state.updatedPrefs })
-        .then(() => console.log('sent'))
+        .then(() => this.getUserPrefs())
+        .then(() => this.setState({ updatedPrefs : [] }))
     } else {
       console.log(e.target.title);
       console.log(this.state); 
