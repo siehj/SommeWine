@@ -3,6 +3,8 @@ import UserPreferenceCard from './UserPrefCard.jsx';
 import { Card, Button, ListGroup, ListGroupItem,CardTitle, UncontrolledCollapse, Row, Col } from 'reactstrap';
 
 const UserPreferences = (props) => {
+  let inUserPrefs = []; 
+  props.userPrefs.map(obj => inUserPrefs.push(obj.note))
   return props.edit ? 
   (
     <Card className="userPreferences" >
@@ -18,7 +20,7 @@ const UserPreferences = (props) => {
                 <ListGroupItem className="categoryTitle text-center" >{category.toUpperCase()}</ListGroupItem> }
                 
                 { category !== 'Country' ? 
-                  props.prefs[category].map(entry => <ListGroupItem className="prefItem" title={entry.note} onClick={props.update} key={entry.id} >{entry.note}</ListGroupItem>) 
+                  props.prefs[category].map(entry => <ListGroupItem className="prefItem" title={entry.note} onClick={props.update} key={entry.id} >{entry.note} <a>{inUserPrefs.includes(entry.note) ? '-' : '+' }</a></ListGroupItem>) 
                   : 
                   Object.keys(props.prefs[category]).map(region => {
                     return (
@@ -28,7 +30,7 @@ const UserPreferences = (props) => {
                           props.prefs[category][region].map(country => {
                             return (
                               <UncontrolledCollapse toggler="#regions" key={country.id} >
-                                <ListGroupItem className="countries prefItem" title={country.note} onClick={props.update} >{country.note}</ListGroupItem>
+                                <ListGroupItem className="countries prefItem" title={country.note} onClick={props.update} >{country.note}<a>{inUserPrefs.includes(country.note) ? '-' : '+' }</a></ListGroupItem>
                               </UncontrolledCollapse>
                             )
                         })
