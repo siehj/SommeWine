@@ -72,9 +72,17 @@ const getAllPreferences = () => {
 };
 
 const getUserPreferences = (username) => {
-  const query = 'SELECT * FROM user_preference WHERE user_id=$1;';
+  const query = 'SELECT preference_id FROM user_preferences WHERE user_id=(SELECT id FROM users WHERE username=$1);';
   const params = [username];
   return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const getPrefById = (id) => {
+  const query = 'SELECT preferences.note FROM preferences WHERE id=$1;';
+  const params = [id];
+  return new Promise ((resolve, reject) => {
+    client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows));
+  })
 };
 
 // const getUserId = (username) => {
@@ -143,6 +151,6 @@ const checkPreferenceExists = (username, preference) => {
 module.exports = { addUser, 
   checkUsername,
   checkPreferenceExists, 
-  deleteUserPreference,
+  deleteUserPreference, getUserPreferences, getPrefById,
   findUser, getUserInfo, getUserData, getAllPreferences, addUserPreference };
 
