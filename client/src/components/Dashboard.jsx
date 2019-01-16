@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      curr: 'Profile',
+      curr: 'Search',
       tabs: ['Search', 'Cellar', 'Profile'],
       showAdv: false,
       user: '',
