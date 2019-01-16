@@ -16,8 +16,8 @@
   margin-top: 50%;
 }
 .cellarLeft:hover {
-  /* background-color: rgba(139, 0, 0, 0.904); */
-  /* color: white; */
+  background-color: rgba(139, 0, 0, 0.904);
+  color: white;
 }
 
 .cellarRight {
@@ -65,4 +65,13 @@
 
 .rbText {
   padding-top: 20%;
+}
+
+.cellarPhoto {
+  background-color: darkred;
+  height: 100%;
+}
+
+.tasteLater {
+  height: 100%;
 }
