@@ -56,6 +56,7 @@ CREATE TABLE "preferences" (
 INSERT INTO preferences (note, category) VALUES ('Red', 'type');
 INSERT INTO preferences (note, category) VALUES ('White', 'type');
 INSERT INTO preferences (note, category) VALUES ('Rose', 'type');
+INSERT INTO preferences (note, category) VALUES ('Champagne', 'type');
 INSERT INTO preferences (note, category) VALUES ('Sweet', 'flavor');
 INSERT INTO preferences (note, category) VALUES ('Dry', 'flavor');
 INSERT INTO preferences (note, category) VALUES ('Floral', 'flavor');
