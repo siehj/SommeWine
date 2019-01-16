@@ -129,8 +129,6 @@ module.exports = {
             .catch(err => console.log)
           })
       })
-      
-    // res.end();
   },
 
   getUserPreferences : (req, res) => {
@@ -149,5 +147,12 @@ module.exports = {
         })
       })
       .catch(err => console.log('this is an error2'))
+  },
+
+  updateUserProfile : (req, res) => {
+    let username = req.session.user.username;
+    db.updateUser(req.body.name, req.body.email, username)
+      .then(() => res.end());
   }
+
 };
