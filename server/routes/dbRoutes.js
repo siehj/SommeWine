@@ -117,29 +117,37 @@ module.exports = {
               if(result[0].exists) {
                 // console.log('exists, now we need to remove')
                 db.deleteUserPreference(username, obj)
-                  .then(() => console.log("removed", obj))
+                  .then(() => res.end())
                   .catch(err => console.log)
               } else {
                 // console.log('doesnt exist, now we need to add')
                 db.addUserPreference(username, obj)
-                  .then(() => console.log("added", obj))
-                  .catch(err => console.log)
+                  .then(() => res.end())
+                  .catch(err => res.end())
               }
             })
             .catch(err => console.log)
           })
       })
-    res.end();
+      
+    // res.end();
   },
 
   getUserPreferences : (req, res) => {
     let username = req.session.user.username;
-    console.log(username);
-
-    // db query to get the 
-
+    let list = [];
+    db.getUserPreferences(username)
+      .then(result => {
+        let length = result.length;
+        return result.map(prefs => { 
+          new Promise ((resolve, reject) => {
+            db.getPrefById(prefs.preference_id)
+              .then((result) => resolve(list.push(result[0])))
+              .then(() => { if(list.length === length) res.send(list) } )
+              .catch(err => reject(err))
+          })
+        })
+      })
+      .catch(err => console.log('this is an error2'))
   }
-
-
-
 };
