@@ -12,7 +12,7 @@ class Search extends React.Component {
     this.state = {
       query: '',
       wines: [],
-      advancedSearch: true,
+      advancedSearch: false,
       start: 0,
       end: 10,
       wines: [],
@@ -21,21 +21,35 @@ class Search extends React.Component {
         notes: [],
         regions: []
       },
+      allPreferences : {}
     };
 
     this.getQuery = this.getQuery.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
+    this.FavoriteWine = this.FavoriteWine.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.toggleAdvMenu = this.toggleAdvMenu.bind(this);
-    this.FavoriteWine = this.FavoriteWine.bind(this);
     this.TasteLaterList = this.TasteLaterList.bind(this);
+    this.getAllPreferences = this.getAllPreferences.bind(this);
+  }
+
+  componentDidMount() {
+    this.toggleAdvMenu()
+    this.getAllPreferences();  
+  }
+    
+  getAllPreferences() {
+    axios.post('/db/getAllPreferences')
+      .then(({ data }) => this.setState({ allPreferences : data }));
   }
 
   toggleAdvMenu() {
-    console.log(this.state.advancedSearch,' => ', !this.state.advancedSearch);
+    // console.log(this.state.advancedSearch,' => ', !this.state.advancedSearch);
     this.setState({ advancedSearch: !this.state.advancedSearch });
+    let element = document.getElementById("advSearchNav");
+    this.state.advancedSearch ? element.style.height = "150px" : element.style.height = "0px";
   }
 
   updateQuery(e) {
@@ -43,17 +57,21 @@ class Search extends React.Component {
   }
 
   getQuery(e) {
-    if (e.target.name === 'query') {
-      this.setState({query: e.target.value});
-    } else {
-      // this is to add if not added to the object's array, or remove if already in the array. 
-      // mimics the checked and unchecked nature of the boxes.
-      if(!this.state.additional[e.target.name].includes(e.target.value)) {
-        this.state.additional[e.target.name].push(e.target.value);
-      } else {
-        this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
-      }
-    }
+    // if (e.target.name === 'query') {
+    //   this.setState({query: e.target.value});
+    // } else {
+    //   // this is to add if not added to the object's array, or remove if already in the array. 
+    //   // mimics the checked and unchecked nature of the boxes.
+    //   if(!this.state.additional[e.target.name].includes(e.target.value)) {
+    //     this.state.additional[e.target.name].push(e.target.value);
+    //   } else {
+    //     this.state.additional[e.target.name].splice(this.state.additional[e.target.name].indexOf(e.target.value), 1);
+    //   }
+    // }
+    let query = this.state.query;
+    query = query.includes(e.target.value) ? query.replace(e.target.value, '') : query + ' ' + e.target.value;
+    this.setState({ query : query }) 
+
   }
 
   handleSearch() {
@@ -93,7 +111,7 @@ class Search extends React.Component {
               <Button outline onClick={this.handleSearch} >Search</Button>
             </InputGroupAddon>
           </InputGroup>
-        { this.state.advancedSearch ? <SearchNav /> : null }
+        <SearchNav prefs={this.state.allPreferences} status={this.state.advancedSearch} query={this.getQuery} />
           <div className="searchMain">
             <div className="result">
               {
