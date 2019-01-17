@@ -4,13 +4,11 @@ import { Input, Button, Col, Row } from 'reactstrap';
 const CellarPhoto = (props) => {
   return (
     <div className="cellarPhoto" >
-      <Col>
+      <h3 onClick={() => props.toggle('AddPhoto')} >COMING SOON</h3>
+      {/* <Col>
         <Row className="text-center" >
           <Input type="file" />
         </Row>
-        {/* <Row>
-          <Input placeholder="Add Note" />
-        </Row> */}
         <Row>
           <Col>
             <Button>Add to Favorites</Button>
@@ -20,7 +18,7 @@ const CellarPhoto = (props) => {
           </Col>
         </Row>
         <Button onClick={() => props.toggle('AddPhoto')} >Cancel</Button>
-      </Col>
+      </Col> */}
     </div>
   )
 };

@@ -5,7 +5,9 @@ import TasteLater from './CellarTasteLater.jsx';
 const CellarHome = (props) => {
   return (
     <div className="cellarHome">
-      <div className="cellarLeft"><h3 className="text-center" style={{ marginTop: '40%' }} >Favorites</h3></div>
+      <div className="cellarLeft" onClick={() => props.toggle('ShowFavorites') } >
+        <h3 className="text-center" style={{ marginTop: '40%' }} >Favorites</h3>
+      </div>
       <div className="cellarRight">
         <div className="rightTop" >
           {
