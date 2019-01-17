@@ -14,16 +14,18 @@ class Dashboard extends React.Component {
       tabs: ['Search', 'Cellar', 'Profile'],
       showAdv: false,
       user: '',
-      userData: {
-        favs: [],
-        prefs: [],
-        profile: []
-      },
+      profile: {},
+      allPrefs : {},
+      userPrefs: [],
       userFavs: [],
       faveChecker: []
     }
     this.logout = this.logout.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    this.getUserPrefs = this.getUserPrefs.bind(this);
+    this.getAllAppData = this.getAllAppData.bind(this);
+    this.getPreferences = this.getPreferences.bind(this);
+    this.getUserProfile = this.getUserProfile.bind(this);
     this.getUserFavorites = this.getUserFavorites.bind(this);
   }
 
@@ -32,17 +34,40 @@ class Dashboard extends React.Component {
     let stateObj = { username: sessionStorage.getItem('auth') }
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
-    this.getUserFavorites()
+    this.getAllAppData()
   }
 
   changeTab(tabName) {
     this.setState({ curr: tabName }); //() => history.pushState({ tab: `${tabName}`}, 'change tabs', `/dashboard/${this.state.user}/${tabName}`)
     this.setState({ showAdv: false });
+    this.getAllAppData()
+  }
+
+  getAllAppData() {
+    this.getUserFavorites()
+    this.getUserPrefs()
+    this.getUserProfile()
+    this.getPreferences()
   }
 
   getUserFavorites() {
     axios.post('/db/getUserFavorites')
       .then(({ data }) => this.setState({ userFavs : data.allFavorites, faveChecker : data.namesOnly }));
+  }
+
+  getUserPrefs () {
+    axios.post('/db/userPrefs')
+    .then(({ data }) => this.setState({ userPrefs : data }))
+  }
+
+  getUserProfile() {
+    axios.post('/db/profile')
+      .then(({ data }) => this.setState({ profile : data }))
+  }
+
+  getPreferences() {
+    axios.post('/db/profilePreferences')
+      .then(({ data }) => this.setState({ allPrefs : data }))
   }
 
   logout() {
@@ -51,6 +76,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div id="dashboard">
         <div id="nav">
@@ -70,7 +96,10 @@ class Dashboard extends React.Component {
           </div>
         </div>
       <div id="main" >
-        <Routes component={this.state.curr} favorites={this.state.userFavs} getFav={this.getUserFavorites} checker={this.state.faveChecker} /> 
+        <Routes component={this.state.curr} favorites={this.state.userFavs} getFav={this.getUserFavorites} checker={this.state.faveChecker} 
+          allPrefs={this.state.allPrefs} userPrefs={this.state.userPrefs} userProfile={this.state.profile} getUserPrefs={this.getUserPrefs}
+          getUserProfile={this.getUserProfile} getPreferences={this.getPreferences}
+        /> 
       </div>
     </div>
     )
