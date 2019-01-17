@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
           </div>
         </div>
       <div id="main" >
-        <Routes component={this.state.curr} favorites={this.userFavs} checker={this.faveChecker} /> 
+        <Routes component={this.state.curr} favorites={this.state.userFavs} getFav={this.getUserFavorites} checker={this.state.faveChecker} /> 
       </div>
     </div>
     )

@@ -4,7 +4,7 @@ import Cellar from './Cellar.jsx';
 import Profile from './Profile.jsx';
 
 const Routes = (props) => {
-  if (props.component === 'Search') return <Search checker={props.checker} /> 
+  if (props.component === 'Search') return <Search checker={props.checker} getFav={props.getFav} /> 
   if (props.component === 'Cellar') return <Cellar /> 
   if (props.component === 'Profile') return <Profile /> 
 }
