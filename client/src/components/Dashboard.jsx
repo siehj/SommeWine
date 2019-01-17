@@ -19,9 +19,12 @@ class Dashboard extends React.Component {
         prefs: [],
         profile: []
       },
+      userFavs: [],
+      faveChecker: []
     }
     this.logout = this.logout.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    this.getUserFavorites = this.getUserFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +32,7 @@ class Dashboard extends React.Component {
     let stateObj = { username: sessionStorage.getItem('auth') }
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
-
+    this.getUserFavorites()
   }
 
   changeTab(tabName) {
@@ -37,6 +40,10 @@ class Dashboard extends React.Component {
     this.setState({ showAdv: false });
   }
 
+  getUserFavorites() {
+    axios.post('/db/getUserFavorites')
+      .then(({ data }) => this.setState({ userFavs : data.allFavorites, faveChecker : data.namesOnly }));
+  }
 
   logout() {
     sessionStorage.removeItem('auth');
@@ -63,7 +70,7 @@ class Dashboard extends React.Component {
           </div>
         </div>
       <div id="main" >
-        <Routes component={this.state.curr} /> 
+        <Routes component={this.state.curr} favorites={this.userFavs} checker={this.faveChecker} /> 
       </div>
     </div>
     )

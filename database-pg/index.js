@@ -149,10 +149,10 @@ const addWineToFavorites = (username, wineName) => {
 };
 
 const removeWineFromFavorites = (username, wineName) => {
-  const query = 'DELETE FROM wines WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE note=$2);';
+  const query = 'DELETE FROM user_wines WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE name=$2);';
   const params = [username, wineName];
 
-  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+  return new Promise ((resolve, reject) => client.query(query, params, (err, rows) => err ? reject(err) : resolve(rows) ));
 };
 
 const getUserFavorites = (username) => {
@@ -162,8 +162,8 @@ const getUserFavorites = (username) => {
   return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
 };
 
-const getWineNameById = (id) => {
-  const query = 'SELECT name FROM wines WHERE id=$1;';
+const getWineById = (id) => {
+  const query = 'SELECT * FROM wines WHERE id=$1;';
   params = [id];
 
   return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
@@ -193,7 +193,7 @@ module.exports = { addUser,
   checkUsername,
   checkPreferenceExists, 
   getUserFavorites,
-  getWineNameById,
+  getWineById,
   removeWineFromDB,
   removeWineFromFavorites,
   deleteUserPreference, getUserPreferences, getPrefById,

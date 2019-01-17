@@ -157,17 +157,14 @@ module.exports = {
 
   favoriteWine : (req, res) => {
     let username = req.session.user.username;
-    console.log(req.body.wine)
     db.checkFavorites(username, req.body.wine.name)
       .then((result) => {
         if (result[0].exists) {
-          console.log('exists');
           //remove from favorites
           db.removeWineFromFavorites(username, req.body.wine.name)
             .then(() => res.end());
         }
         else {
-          console.log('doesnt exist');
           //add to favorites (add to wines first);
           db.checkWineDB(req.body.wine.name)
             .then((response) => {
@@ -190,5 +187,23 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  getUserFavorites : (req, res) => {
+    let username = req.session.user.username;
+    let allFavorites = [];
+    let namesOnly = [];
 
+    db.getUserFavorites(username)
+      .then(results => {
+        let length = results.length;
+        results.map((wine) => {
+          db.getWineById(wine.wine_id)
+            .then((stuff) => {
+              allFavorites.push(stuff[0])
+              namesOnly.push(stuff[0].name)
+            })
+            .then(() => { if (namesOnly.length === length) res.send({ namesOnly, allFavorites }) })
+          })
+        })
+        .catch(err => console.log(err))
+  }
 };
