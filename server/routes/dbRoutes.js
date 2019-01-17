@@ -153,6 +153,42 @@ module.exports = {
     let username = req.session.user.username;
     db.updateUser(req.body.name, req.body.email, username)
       .then(() => res.end());
-  }
+  },
+
+  favoriteWine : (req, res) => {
+    let username = req.session.user.username;
+    console.log(req.body.wine)
+    db.checkFavorites(username, req.body.wine.name)
+      .then((result) => {
+        if (result[0].exists) {
+          console.log('exists');
+          //remove from favorites
+          db.removeWineFromFavorites(username, req.body.wine.name)
+            .then(() => res.end());
+        }
+        else {
+          console.log('doesnt exist');
+          //add to favorites (add to wines first);
+          db.checkWineDB(req.body.wine.name)
+            .then((response) => {
+              if (response[0].exists) {
+                // if in the wine db, add to favorite 
+                db.addWineToFavorites(username, req.body.wine.name)
+                  .then(() => res.end())
+              } else {
+              //   // if not, then add to winedb
+                db.addWineToDB(req.body.wine)
+                  .then(() => { 
+                    db.addWineToFavorites(username, req.body.wine.name)
+                      .then(() => res.end())
+                  })
+              }
+            })
+
+        }
+      })
+      .catch(err => console.log(err));
+  },
+
 
 };

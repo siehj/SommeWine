@@ -33,4 +33,6 @@ router.post('/db/userPrefs', db.getUserPreferences);
 
 router.put('/db/updateUserProfile', db.updateUserProfile);
 
+router.post('/db/FavoriteWine', db.favoriteWine);
+
 module.exports = router;
