@@ -13,7 +13,10 @@ const SearchResult = (props) => {
         <Row><a>Type: {props.wine.type}</a></Row>
       </Col>
       <Col >
+      {
+        props.checker.includes(props.wine.name) ? <a id="unsaved" onClick={() => props.favorite(props.wine)} >- Unsave</a> : 
         <a id="heart" onClick={() => props.favorite(props.wine)} name={JSON.stringify(props.wine)} value="false" >&#9825; Save Wine</a>
+      }
         <br/>
         <a id="list" onClick={() => props.taste(props.wine)} >+ Taste List</a>
       </Col>

@@ -91,6 +91,15 @@
   margin-bottom: 5px;
 }
 
+#unsaved {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#unsaved:hover {
+  color: darkred;
+  font-weight: bold;
+}
 
 /* 
 .result em {

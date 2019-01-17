@@ -74,7 +74,7 @@ class Search extends React.Component {
 
   FavoriteWine(wine) {
     axios.post('/db/FavoriteWine', { wine })
-      .then((msg) => console.log(msg))
+      .then(() => this.props.getFav())
   }
 
   TasteLaterList(wine) {
@@ -96,7 +96,7 @@ class Search extends React.Component {
           <div className="searchMain">
             <div className="result">
               {
-                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} favorite={this.FavoriteWine} taste={this.TasteLaterList} />)
+                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} favorite={this.FavoriteWine} taste={this.TasteLaterList} checker={this.props.checker} />)
               }
             {
               this.state.wines.length ? 
