@@ -73,7 +73,8 @@ class Search extends React.Component {
   }
 
   FavoriteWine(wine) {
-    console.log(wine)
+    axios.post('/db/FavoriteWine', { wine })
+      .then((msg) => console.log(msg))
   }
 
   TasteLaterList(wine) {

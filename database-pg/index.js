@@ -114,13 +114,60 @@ const updateUser = (name, email, username) => {
   const params = [name, email, username];
   return new Promise ((resolve, reject) => client.query(query, params, (err, rows) => err ? reject(err) : resolve(rows)));
 };
-// let getUserFavorites = (userId, callback) => {
-//   let query = `SELECT * FROM user_wines WHERE user_id=${userId};`;
-//   connection.query(query, (err, results) => {
 
-//   });
+const checkFavorites = (username, wineName) => {
+  const query = 'SELECT EXISTS (SELECT 1 FROM user_wines WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE name=$2));';
+  const params = [username, wineName];
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
 
-// }
+const checkWineDB = (wineName) => {
+  const query = 'SELECT EXISTS (SELECT 1 FROM wines WHERE name=$1);';
+  const params = [wineName];
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const addWineToDB = (wine) => {
+  const query = 'INSERT INTO wines (name, region, winery, price, vintage, link, image, rating) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);';
+  const params = [wine.name, wine.region, wine.winery, wine.price, wine.vintage, wine.link, wine.image, wine.rating];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, rows ) => err ? reject(err) : resolve(rows) ));
+};
+
+const removeWineFromDB = (wineName) => {
+  const query = 'DELETE FROM wines WHERE name=$1;';
+  const params = [wineName];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const addWineToFavorites = (username, wineName) => {
+  const query = 'INSERT INTO user_wines (user_id, wine_id) VALUES ((SELECT id FROM users WHERE username=$1), (SELECT id FROM wines WHERE name=$2));';
+  const params = [username, wineName];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const removeWineFromFavorites = (username, wineName) => {
+  const query = 'DELETE FROM wines WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE note=$2);';
+  const params = [username, wineName];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const getUserFavorites = (username) => {
+  const query = 'SELECT * FROM user_wines WHERE user_id=(SELECT id FROM users WHERE username=$1);';
+  const params = [username];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const getWineNameById = (id) => {
+  const query = 'SELECT name FROM wines WHERE id=$1;';
+  params = [id];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
 
 // let addUserFavorites = (userId, wine, callback) => {
 //   let query = `INSERT INTO user_wines `
@@ -139,8 +186,16 @@ const updateUser = (name, email, username) => {
 
 
 module.exports = { addUser, 
+  addWineToDB,
+  addWineToFavorites,
+  checkFavorites,
+  checkWineDB,
   checkUsername,
   checkPreferenceExists, 
+  getUserFavorites,
+  getWineNameById,
+  removeWineFromDB,
+  removeWineFromFavorites,
   deleteUserPreference, getUserPreferences, getPrefById,
   findUser, getUserInfo, getUserData, getAllPreferences, addUserPreference, updateUser };
 
