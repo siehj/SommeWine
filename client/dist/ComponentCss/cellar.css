@@ -75,3 +75,22 @@
 .tasteLater {
   height: 100%;
 }
+
+.cellarFavorites {
+  width: 80%;
+}
+
+.favWines {
+  margin-bottom: 10px; 
+}
+
+.favLabel {
+  height: 80px;
+}
+
+.favTitle {
+  cursor: pointer;
+}
+
+
+
