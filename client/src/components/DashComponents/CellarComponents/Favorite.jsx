@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Collapse, CardTitle, CardText, Card, Media } from 'reactstrap';
+import { Row, Col, Collapse, CardTitle, CardText, Card, Media, Button } from 'reactstrap';
 
 class Favorite extends React.Component {
   constructor(props) {
@@ -21,19 +21,22 @@ class Favorite extends React.Component {
         <Collapse isOpen={this.state.collapse} >
           <Row style={{ paddingLeft : '2%' }} >
             <Col style={{ width: '80%' }} >
-            <div className="text-center" >
-              <CardTitle>Wine Details</CardTitle>
-            </div>
+            <div>
+              <CardTitle className="text-center" >Wine Details</CardTitle>
               <CardText>Winery: {this.props.wine.winery}</CardText>
               <CardText>MSRP: ${this.props.wine.price}</CardText>
+            </div>
             </Col> 
             <Col style={{ width: '15%'}} className="text-center" >
               <div className="text-center" >
                 <CardTitle>Wine Label</CardTitle>
-                <Media className="favLabel" src={this.props.wine.image} /> 
+                <a><Media className="favLabel" src={this.props.wine.image} /></a> 
               </div>
             </Col>
           </Row>
+          {/* <div className="text-center" >
+            <Button style={{ marginTop: '10px' }} >Remove From Favorites</Button>
+          </div> */}
         </Collapse>
       </Card>
     )
