@@ -38,6 +38,15 @@ CREATE TABLE "user_wines" (
   PRIMARY KEY ("id")
 );
 
+CREATE TABLE "user_tastelist" (
+  "id" SERIAL,
+  "user_id" INTEGER REFERENCES users ("id"),
+  "wine_id" INTEGER REFERENCES wines ("id"),
+  "notes" text, 
+  "photo" text,
+  PRIMARY KEY ("id")
+);
+
 CREATE TABLE "user_preferences" (
   "id" SERIAL,
   "user_id" INTEGER REFERENCES users ("id"), 
