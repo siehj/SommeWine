@@ -169,6 +169,33 @@ const getWineById = (id) => {
   return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
 };
 
+const checkTasteList = (username, wineName) => {
+  const query = 'SELECT EXISTS (SELECT 1 FROM user_tastelist WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE name=$2));';
+  const params = [username, wineName];
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const addWineToTasteList = (username, wineName) => {
+  const query = 'INSERT INTO user_tastelist (user_id, wine_id) VALUES ((SELECT id FROM users WHERE username=$1), (SELECT id FROM wines WHERE name=$2));';
+  const params = [username, wineName];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
+const removeWineFromTasteList = (username, wineName) => {
+  const query = 'DELETE FROM user_tastelist WHERE user_id=(SELECT id FROM users WHERE username=$1) AND wine_id=(SELECT id FROM wines WHERE name=$2);';
+  const params = [username, wineName];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, rows) => err ? reject(err) : resolve(rows) ));
+};
+
+const getUserTasteList = (username) => {
+  const query = 'SELECT * FROM user_tastelist WHERE user_id=(SELECT id FROM users WHERE username=$1);';
+  const params = [username];
+
+  return new Promise ((resolve, reject) => client.query(query, params, (err, { rows }) => err ? reject(err) : resolve(rows) ));
+};
+
 // let addUserFavorites = (userId, wine, callback) => {
 //   let query = `INSERT INTO user_wines `
 // }
@@ -188,13 +215,15 @@ const getWineById = (id) => {
 module.exports = { addUser, 
   addWineToDB,
   addWineToFavorites,
+  addWineToTasteList,
   checkFavorites,
   checkWineDB,
+  checkTasteList,
   checkUsername,
   checkPreferenceExists, 
   getUserFavorites,
-  getWineById,
-  removeWineFromDB,
+  getWineById, getUserTasteList,
+  removeWineFromDB, removeWineFromTasteList,
   removeWineFromFavorites,
   deleteUserPreference, getUserPreferences, getPrefById,
   findUser, getUserInfo, getUserData, getAllPreferences, addUserPreference, updateUser };
