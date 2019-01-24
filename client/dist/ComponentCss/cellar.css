@@ -80,15 +80,15 @@
   width: 80%;
 }
 
-.favWines {
+.cellarWines {
   margin-bottom: 10px; 
 }
 
-.favLabel {
+.cellarLabel {
   height: 80px;
 }
 
-.favTitle {
+.cellarTitle {
   cursor: pointer;
 }
 
