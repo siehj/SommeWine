@@ -23,8 +23,6 @@ Dynamic interations with various tables in the postgreSQL database allows for us
 ### Saving and Updating User Preference
 To get and give accurate user information, a user can save an update their `Wine Type`, `Flavors/Notes`, and `Region/Country` preferences. 
 
-<img src="./ReadmeImages/SavePreferences.JPG" width="1000px" height="300px"/>
-
 
 ## TECH STACK
   * React
