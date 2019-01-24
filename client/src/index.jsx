@@ -7,7 +7,6 @@ import LandingPage from './components/Landing.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Register from './components/Register.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import LandingModal from './components/LandingModal.jsx';
 
 
 class App extends React.Component {
