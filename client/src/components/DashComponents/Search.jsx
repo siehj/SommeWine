@@ -59,7 +59,10 @@ class Search extends React.Component {
   }
 
   handleSearch() {
-    this.setState({ advancedSearch : false })
+    this.setState({ advancedSearch : false }, () => {
+      let element = document.getElementById("advSearchNav");
+      element.style.height = "0px";
+    })
     axios.post('/api/wines', { query: this.state.query })
       .then(({ data }) => this.setState({ wines: data, query : '' }))
   }
@@ -78,7 +81,8 @@ class Search extends React.Component {
   }
 
   TasteLaterList(wine) {
-    console.log(wine)
+    axios.post('/db/TasteList', { wine })
+      .then(() => this.props.getTasteList())
   }
 
   render() {
@@ -96,7 +100,7 @@ class Search extends React.Component {
           <div className="searchMain">
             <div className="result">
               {
-                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} favorite={this.FavoriteWine} taste={this.TasteLaterList} checker={this.props.checker} />)
+                this.state.wines.slice(this.state.start, this.state.end).map((wine, i) => <SearchResults key={i} wine={wine} favorite={this.FavoriteWine} taste={this.TasteLaterList} checker={this.props.checker} TLChecker={this.props.tasteListChecker} />)
               }
             {
               this.state.wines.length ? 

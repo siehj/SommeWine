@@ -18,7 +18,9 @@ class Dashboard extends React.Component {
       allPrefs : {},
       userPrefs: [],
       userFavs: [],
-      faveChecker: []
+      faveChecker: [],
+      userTasteList: [],
+      tasteListChecker: []
     }
     this.logout = this.logout.bind(this);
     this.changeTab = this.changeTab.bind(this);
@@ -26,28 +28,30 @@ class Dashboard extends React.Component {
     this.getAllAppData = this.getAllAppData.bind(this);
     this.getPreferences = this.getPreferences.bind(this);
     this.getUserProfile = this.getUserProfile.bind(this);
+    this.getUserTasteList = this.getUserTasteList.bind(this);
     this.getUserFavorites = this.getUserFavorites.bind(this);
   }
 
   componentDidMount() {
     // if user is accessing the url /dashboard directly but their cookie still exists, then this will add the username to the url
-    let stateObj = { username: sessionStorage.getItem('auth') }
+    let stateObj = { username: sessionStorage.getItem('auth') };
     history.replaceState(stateObj, 'user url', `/dashboard/${sessionStorage.getItem('auth')}`);
     this.setState({ user: sessionStorage.getItem('auth') });
-    this.getAllAppData()
+    this.getAllAppData();
   }
 
   changeTab(tabName) {
     this.setState({ curr: tabName }); //() => history.pushState({ tab: `${tabName}`}, 'change tabs', `/dashboard/${this.state.user}/${tabName}`)
     this.setState({ showAdv: false });
-    this.getAllAppData()
+    this.getAllAppData();
   }
-
+ 
   getAllAppData() {
-    this.getUserFavorites()
-    this.getUserPrefs()
-    this.getUserProfile()
-    this.getPreferences()
+    this.getUserProfile();
+    this.getUserPrefs();
+    this.getPreferences();
+    this.getUserTasteList();
+    this.getUserFavorites();
   }
 
   getUserFavorites() {
@@ -55,19 +59,24 @@ class Dashboard extends React.Component {
       .then(({ data }) => this.setState({ userFavs : data.allFavorites, faveChecker : data.namesOnly }));
   }
 
+  getUserTasteList() {
+    axios.post('/db/getUserTasteList')
+      .then(({ data }) => this.setState({ userTasteList: data.allTasteList , tasteListChecker: data.namesOnly }));
+  }
+
   getUserPrefs () {
     axios.post('/db/userPrefs')
-    .then(({ data }) => this.setState({ userPrefs : data }))
+    .then(({ data }) => this.setState({ userPrefs : data }));
   }
 
   getUserProfile() {
     axios.post('/db/profile')
-      .then(({ data }) => this.setState({ profile : data }))
+      .then(({ data }) => this.setState({ profile : data }));
   }
 
   getPreferences() {
     axios.post('/db/profilePreferences')
-      .then(({ data }) => this.setState({ allPrefs : data }))
+      .then(({ data }) => this.setState({ allPrefs : data }));
   }
 
   logout() {
@@ -76,7 +85,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div id="dashboard">
         <div id="nav">
@@ -97,8 +105,8 @@ class Dashboard extends React.Component {
         </div>
       <div id="main" >
         <Routes component={this.state.curr} favorites={this.state.userFavs} getFav={this.getUserFavorites} checker={this.state.faveChecker} 
-          allPrefs={this.state.allPrefs} userPrefs={this.state.userPrefs} userProfile={this.state.profile} getUserPrefs={this.getUserPrefs}
-          getUserProfile={this.getUserProfile} getPreferences={this.getPreferences}
+          allPrefs={this.state.allPrefs} userPrefs={this.state.userPrefs} userProfile={this.state.profile} getUserPrefs={this.getUserPrefs} tasteList={this.state.userTasteList}
+          getUserProfile={this.getUserProfile} getPreferences={this.getPreferences} getTasteList={this.getUserTasteList} tasteListChecker={this.state.tasteListChecker}
         /> 
       </div>
     </div>

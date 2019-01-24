@@ -18,7 +18,10 @@ const SearchResult = (props) => {
         <a id="heart" onClick={() => props.favorite(props.wine)} name={JSON.stringify(props.wine)} value="false" >&#9825; Save Wine</a>
       }
         <br/>
-        <a id="list" onClick={() => props.taste(props.wine)} >+ Taste List</a>
+      {
+        props.TLChecker.includes(props.wine.name) ? <a id="removeList" onClick={() => props.taste(props.wine)} >- List</a> :
+          <a id="list" onClick={() => props.taste(props.wine)} >+ Taste List</a>
+      }
       </Col>
     </Row>
   )
