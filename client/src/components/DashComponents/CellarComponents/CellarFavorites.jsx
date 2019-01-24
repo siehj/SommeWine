@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Media, CardTitle, CardText, Col, Row } from 'reactstrap';
-import Favorite from './Favorite.jsx';
+import { Col, Row, Button } from 'reactstrap';
+import CellarWine from './CellarWine.jsx';
 
 const CellarFavorites = (props) => {
   return (
@@ -9,11 +9,13 @@ const CellarFavorites = (props) => {
       <Row >
         <Col className="cellarFavorites" >
         {
-          props.favorites.map(wine => <Favorite key={wine.id} wine={wine} />)
+          props.favorites.map(wine => <CellarWine key={wine.id} wine={wine} />)
         }
         </Col>
-
       </Row>
+      <div>
+        <Button onClick={() => props.toggle('ShowFavorites')} outline color="secondary" block>Back</Button>
+      </div>
     </Col>
   )
 }

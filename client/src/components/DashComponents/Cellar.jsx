@@ -2,6 +2,7 @@ import React from 'react';
 import '../../../dist/ComponentCss/cellar.css';
 import CellarFavorites from './CellarComponents/CellarFavorites.jsx';
 import CellarHome from './CellarComponents/CellarHome.jsx';
+import TasteLater from './CellarComponents/CellarTasteLater.jsx';
 
 class Cellar extends React.Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class Cellar extends React.Component {
     return (
       <div>
         {
-          this.state.ShowFavorites ? <CellarFavorites favorites={this.props.favorites} /> :
+          this.state.ShowFavorites ? <CellarFavorites favorites={this.props.favorites} toggle={this.toggleFeature} /> :
+          this.state.ShowTasteLater ? <TasteLater tasteList={this.props.tasteList} toggle={this.toggleFeature} /> :
           <CellarHome showFavs={this.state.ShowFavorites} addPhoto={this.state.AddPhoto} toggle={this.toggleFeature} tasteLater={this.state.ShowTasteLater} />        
         }
       </div>
