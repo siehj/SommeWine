@@ -37,4 +37,8 @@ router.post('/db/FavoriteWine', db.favoriteWine);
 
 router.post('/db/getUserFavorites', db.getUserFavorites);
 
+router.post('/db/TasteList', db.tasteListWine);
+
+router.post('/db/getUserTasteList', db.getUserTasteList);
+
 module.exports = router;

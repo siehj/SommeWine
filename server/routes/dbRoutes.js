@@ -205,5 +205,61 @@ module.exports = {
           })
         })
         .catch(err => console.log(err))
-  }
+  },
+
+  tasteListWine : (req, res) => {
+    let username = req.session.user.username;
+    db.checkTasteList(username, req.body.wine.name)
+      .then((result) => {
+        if (result[0].exists) {
+          //remove from favorites
+          console.log('result', result[0].exists)
+          db.removeWineFromTasteList(username, req.body.wine.name)
+            .then(() => res.end());
+        }
+        else {
+          //add to favorites (add to wines first);
+          db.checkWineDB(req.body.wine.name)
+            .then((response) => {
+              if (response[0].exists) {
+                // if in the wine db, add to favorite 
+                db.addWineToTasteList(username, req.body.wine.name)
+                  .then(() => res.end())
+              } else {
+              //   // if not, then add to winedb
+                db.addWineToDB(req.body.wine)
+                  .then(() => { 
+                    db.addWineToTasteList(username, req.body.wine.name)
+                      .then(() => res.end())
+                  })
+              }
+            })
+
+        }
+      })
+      .catch(err => console.log(err));
+  },
+
+  getUserTasteList : (req, res) => {
+    let username = req.session.user.username;
+    let allTasteList = [];
+    let namesOnly = [];
+
+    db.getUserTasteList(username)
+      .then(results => {
+        let length = results.length;
+        results.map((wine) => {
+          db.getWineById(wine.wine_id)
+            .then((stuff) => {
+              allTasteList.push(stuff[0])
+              namesOnly.push(stuff[0].name)
+            })
+            .then(() => { if (namesOnly.length === length) res.send({ namesOnly, allTasteList }) })
+          })
+        })
+        .catch(err => console.log(err))
+  },
+
+
+
 };
