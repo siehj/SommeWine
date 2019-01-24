@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import landingData from './../../../database-pg/landingData';
-// import LandingModal from './NestedComponents/LandingModal.jsx';
 import '../../dist/ComponentCss/landing.css';
+import landingData from './../../../database-pg/landingData';
+import LandingExplanaitions from  './LandingComponents/LandingExp.jsx';
 
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayed: '',
+      displayed: landingData.LandingData.SommeWine,
       features : landingData.LandingData
     };
+    this.changeExplanaition = this.changeExplanaition.bind(this);
+  }
+
+  changeExplanaition(target) {
+    this.setState({ displayed : landingData.LandingData[target] });
   }
 
   render() {
@@ -27,11 +32,11 @@ class LandingPage extends React.Component {
         <section className="two" >
           <div className="features" >
             {
-              Object.keys(this.state.features).map((feature, i) => <h1 key={i} >{feature}</h1> )
+              Object.keys(this.state.features).map((feature, i) => <h1 key={i} onClick={() => this.changeExplanaition(feature)} >{feature}</h1> )
             }
           </div>
           <div className="explanaitions text-center" >
-            <em>blah blah blah</em>
+            <LandingExplanaitions info={this.state.displayed} />
           </div>
         </section>
         <section className="three" >

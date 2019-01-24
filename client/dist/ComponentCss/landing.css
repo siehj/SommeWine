@@ -51,7 +51,7 @@
 }
 
 .explanaitions {
-  margin-top: 40px;
+  margin-top: 60px;
   margin-bottom: 40px;
   text-align: center;
   flex-direction: column;
@@ -64,4 +64,46 @@
 
 #Modal {
   z-index: 15;
+}
+
+.type1Text {
+  font-size: 22px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.type4Box {
+  margin-top: 30px;
+  font-size: 22px;
+}
+
+.type3Box {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  padding-top: 50px;
+}
+
+.Col1 {
+  flex-direction: column;
+  padding-right: 25px;
+  width: 50%;
+  border-right: 2px;
+  border-right-color: white;
+  border-right-style: solid;
+  height: inherit;
+}
+
+.Col2 {
+  flex-direction: column;
+  width: 50%;
+  height: inherit;
+}
+
+.Col1 a {
+  font-size: 25px;
+}
+
+.Col2 a {
+  font-size: 25px;
 }
