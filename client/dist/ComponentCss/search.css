@@ -101,6 +101,15 @@
   font-weight: bold;
 }
 
+#removeList {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#removeList:hover {
+  color: darkred;
+  font-weight: bold;
+}
 /* 
 .result em {
   font-size: 20px;
