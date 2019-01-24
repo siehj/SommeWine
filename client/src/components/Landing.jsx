@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import landingData from './../../../database-pg/landingData';
 // import LandingModal from './NestedComponents/LandingModal.jsx';
 import '../../dist/ComponentCss/landing.css';
 
@@ -8,11 +9,7 @@ class LandingPage extends React.Component {
     super(props);
     this.state = {
       displayed: '',
-      features : {
-        'Customize Search' : {},
-        'Get Suggestions' : {},
-        'Save Wines' : {}
-      }
+      features : landingData.LandingData
     };
   }
 
@@ -37,8 +34,12 @@ class LandingPage extends React.Component {
             <em>blah blah blah</em>
           </div>
         </section>
-        <section className="three text-center" >
-          Bottom
+        <section className="three" >
+          <div className="text-center" >
+            <a href="https://github.com/siehj/sommewine" target="_blank" style={{ color: "darkRed" }}> [ Repo ] </a> 
+            <a href="https://www.github.com/siehj/" target="_blank" style={{ color: "darkRed" }}> [ Github ] </a> 
+            <a href="https://www.linkedin.com/in/siehj/" target="_blank" style={{ color: "darkRed" }}> [ LinkedIn ] </a> 
+          </div>
         </section>
       </div>
     )
